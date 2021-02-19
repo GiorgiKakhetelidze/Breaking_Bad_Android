@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="button_width">285dp</dimen>
+    <dimen name="button_height">44dp</dimen>
+    <dimen name="input_button_corner">12dp</dimen>
+    <dimen name="std_screen_insets">20dp</dimen>
+    <dimen name="edit_text_padding">16dp</dimen>
+</resources>

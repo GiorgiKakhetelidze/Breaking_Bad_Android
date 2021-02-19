@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background"
+    tools:context=".MainActivity">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Action_text"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="267dp"
+        android:text="@string/username_text" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Action_text"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="350dp"
+        android:text="@string/password_text" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/Action_text"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="350dp"
+        android:text="@string/password_text" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/login_screen_have_acc"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="120dp"
+        android:text="@string/login_screen_dont_t_have_an_account" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/login_screen_register"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="95dp"
+        android:text="@string/register" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        style="@style/Edit_Text"
+        android:layout_gravity="top|center"
+        android:layout_marginTop="290dp"
+        android:text="@string/login_screen_username_here" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        style="@style/Edit_Text"
+        android:layout_gravity="top|center"
+        android:layout_marginTop="373dp"
+        android:inputType="textPassword"
+        android:text="@string/login_screen_password_here" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        style="@style/Button_Login"
+        android:layout_gravity="center|top"
+        android:layout_marginTop="445dp"
+        android:text="@string/button_text" />
+</FrameLayout>
+
+
+
+
+
+
+

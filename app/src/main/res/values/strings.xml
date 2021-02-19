@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">BreakingBad</string>
+    <string name="button_text">Login</string>
+    <string name="username_text">USERNAME</string>
+    <string name="password_text">PASSWORD</string>
+    <string name="login_screen_username_here">username here</string>
+    <string name="login_screen_password_here">password here</string>
+    <string name="login_screen_dont_t_have_an_account">Dont\'t have an account?</string>
+    <string name="register">REGISTER</string>
+</resources>
