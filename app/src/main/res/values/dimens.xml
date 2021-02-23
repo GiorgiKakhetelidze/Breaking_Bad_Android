@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="button_width">285dp</dimen>
     <dimen name="button_height">44dp</dimen>
     <dimen name="input_button_corner">12dp</dimen>
     <dimen name="std_screen_insets">20dp</dimen>
+    <dimen name="std_Top_screen_inset">300dp</dimen>
     <dimen name="edit_text_padding">16dp</dimen>
+    <dimen name="std_vertical_margin">16dp</dimen>
+    <dimen name="std_vertical_margin_half">8dp</dimen>
+    <dimen name="screen_inset_bottom">60dp</dimen>
+    <dimen name="screen_inset_top">500dp</dimen>
+    <dimen name="back_btn_pad_btw_icon">-35dp</dimen>
 </resources>

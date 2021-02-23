@@ -1,10 +1,15 @@
 <resources>
     <string name="app_name">BreakingBad</string>
     <string name="button_text">Login</string>
+    <string name="button_register">Register</string>
     <string name="username_text">USERNAME</string>
     <string name="password_text">PASSWORD</string>
-    <string name="login_screen_username_here">username here</string>
+    <string name="username_here">username here</string>
     <string name="login_screen_password_here">password here</string>
     <string name="login_screen_dont_t_have_an_account">Dont\'t have an account?</string>
     <string name="register">REGISTER</string>
+    <string name="registration_username">USERNAME</string>
+    <string name="registration_password">PASSWORD</string>
+    <string name="repeat_password">REPEAT PASSWORD</string>
+    <string name="back_button">BACK</string>
 </resources>

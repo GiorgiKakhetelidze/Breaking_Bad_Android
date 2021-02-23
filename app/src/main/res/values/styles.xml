@@ -9,10 +9,15 @@
         <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="Button_Login">
-        <item name="android:layout_width">@dimen/button_width</item>
+    <style name="Button_Login_Register">
         <item name="android:layout_height">@dimen/button_height</item>
         <item name="android:background">@drawable/button_background</item>
+    </style>
+
+    <style name="Text" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/gotham_bold</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="Edit_Text" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
@@ -41,5 +46,13 @@
         <item name="android:fontFamily">@font/gotham_bold</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="back_button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:drawablePadding">@dimen/back_btn_pad_btw_icon</item>
+        <item name="android:drawableLeft">@drawable/ic_back_button</item>
     </style>
 </resources>
