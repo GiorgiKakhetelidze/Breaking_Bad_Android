@@ -1,15 +1,38 @@
 <resources>
-    <string name="app_name">BreakingBad</string>
+    <string name="app_name" translatable="false">BreakingBad</string>
     <string name="button_text">Login</string>
     <string name="button_register">Register</string>
     <string name="username_text">USERNAME</string>
     <string name="password_text">PASSWORD</string>
     <string name="username_here">username here</string>
-    <string name="login_screen_password_here">password here</string>
+    <string name="password_here">password here</string>
     <string name="login_screen_dont_t_have_an_account">Dont\'t have an account?</string>
     <string name="register">REGISTER</string>
     <string name="registration_username">USERNAME</string>
     <string name="registration_password">PASSWORD</string>
     <string name="repeat_password">REPEAT PASSWORD</string>
     <string name="back_button">BACK</string>
+    <string name="start_btn_txt">START</string>
+    <string name="profile_lang">Language</string>
+    <string name="profile_log_out">Logout</string>
+    <dimen name="button_horizontal_padding">32dp</dimen>
+    <string name="common_no_connection">No internet connection</string>
+    <string name="login_toast">Please enter username and password</string>
+    <string name="login_screen_wrong_credentials">Wrong Credentials</string>
+    <string name="common_error">Error</string>
+    <string name="common_unknown_error">unknown error</string>
+    <string name="common_OK">OK</string>
+    <string name="img_description">character</string>
+    <string name="characters_title">Characters</string>
+    <string name="tab_search">Search</string>
+    <string name="tab_home">Home</string>
+    <string name="tab_saved">Saved</string>
+    <string name="tab_profile">Profile</string>
+    <string name="hint_search">Search</string>
+    <string name="image_background_description">imageBackgroundDescription</string>
+    <string name="image_character_description">imageCharacterDescription</string>
+    <string name="character_details_add">Add</string>
+    <string name="details_page_appearence">APPEARANCES</string>
+    <string name="detail_page_details">DETAILS</string>
+    <string name="detail_page_quotes">QUOTES</string>
 </resources>

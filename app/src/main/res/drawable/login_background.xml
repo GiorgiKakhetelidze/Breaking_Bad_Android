@@ -6,7 +6,7 @@
         </shape>
     </item>
     <item
-        android:drawable="@drawable/bb_logos"
+        android:drawable="@drawable/main_screen_logo"
         android:gravity="top|center"
         android:top="80dp"/>
 </layer-list>

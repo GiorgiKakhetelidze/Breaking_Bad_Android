@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/gray_input" />
+        </shape>
+    </item>
+    <item
+        android:top="12dp"
+        android:drawable="@drawable/better_call_saul_logo"
+        android:gravity="top|center" />
+
+</layer-list>

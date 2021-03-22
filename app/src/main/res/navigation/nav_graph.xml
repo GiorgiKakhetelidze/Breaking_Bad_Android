@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navHomeFragment">
+    <fragment
+        android:id="@+id/navHomeFragment"
+        android:name="com.example.breakingBad.ui.navHome.NavHomeFragment"
+        android:label="RegistrationFragment" />
+
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.example.breakingBad.ui.registration.RegistrationFragment"
+        android:label="RegistrationFragment" />
+
+    <action
+        android:id="@+id/login"
+        app:destination="@+id/loginFragment"
+        app:enterAnim="@anim/slide_in_bottom"
+        app:exitAnim="@anim/slide_out_bottom"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_left" />
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.breakingBad.ui.login.LoginFragment"
+        android:label="LoginFragment">
+        <action
+            android:id="@+id/form_login_to_registration"
+            app:destination="@id/registrationFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/characterDetailsFragment"
+        android:name="com.example.breakingBad.ui.cardDetails.CharacterDetailsFragment"
+        android:label="CharacterDetailsFragment" />
+
+    <action
+        android:id="@+id/showCharacterDetails"
+        app:destination="@id/characterDetailsFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_right"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_left">
+        <argument
+            android:name="DATA"
+            app:argType="com.example.breakingBad.data.models.character.Character" />
+
+    </action>
+
+</navigation>

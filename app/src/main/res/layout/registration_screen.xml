@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".ui.login.LoginFragment">
+
+    <TextView
+        android:id="@+id/backBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Back_Button"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/back_button"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toTopOf="@+id/guidelineTop" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/userNameFirstActionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:gravity="center"
+        tools:text="@string/registration_username"
+        android:textAppearance="@style/Action_text"
+        app:layout_constraintBottom_toTopOf="@+id/userNameInputFirst"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/userNameInputFirst"
+        style="@style/Edit_Text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/username_here"
+        tools:text="@string/username_here"
+        app:layout_constraintBottom_toTopOf="@+id/userNameInputSecond"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toBottomOf="@+id/guidelineTop"
+        app:layout_constraintVertical_bias="0.52" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/userNameSecondActionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:gravity="center"
+        android:text="@string/registration_username"
+        android:textAppearance="@style/Action_text"
+        app:layout_constraintBottom_toTopOf="@+id/userNameInputSecond"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/userNameInputSecond"
+        style="@style/Edit_Text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/username_here"
+        tools:text="@string/username_here"
+        app:layout_constraintBottom_toTopOf="@+id/passwordInputFirst"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toBottomOf="@+id/userNameInputFirst" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/passwordFirstActionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:gravity="center"
+        android:text="@string/registration_password"
+        android:textAppearance="@style/Action_text"
+        app:layout_constraintBottom_toTopOf="@+id/passwordInputFirst"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/passwordInputFirst"
+        style="@style/Edit_Text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:hint="@string/password_here"
+        tools:text="@string/password_here"
+        app:layout_constraintBottom_toTopOf="@+id/passwordInputSecond"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toBottomOf="@+id/userNameInputSecond" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/passwordSecondActionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:gravity="center"
+        android:text="@string/repeat_password"
+        android:textAppearance="@style/Action_text"
+        app:layout_constraintBottom_toTopOf="@+id/passwordInputSecond"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/passwordInputSecond"
+        style="@style/Edit_Text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/password_here"
+        android:inputType="textPassword"
+        tools:text="@string/password_here"
+        app:layout_constraintBottom_toTopOf="@+id/registerBtnRegister"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toBottomOf="@+id/passwordInputFirst" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/registerBtnRegister"
+        style="@style/Login_Register_Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/button_register"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineBot"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toBottomOf="@+id/passwordInputSecond" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="168dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="20dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

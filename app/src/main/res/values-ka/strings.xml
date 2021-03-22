@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BreakingBad</string>
+    <string name="button_text">შესვლა</string>
+    <string name="button_register">რეგისტრაცია</string>
+    <string name="username_text">მომხარებელი</string>
+    <string name="password_text">პაროლი</string>
+    <string name="username_here">შეიყვანეთ მომხარებელი</string>
+    <string name="password_here">შეიყვანეთ პაროლი</string>
+    <string name="login_screen_dont_t_have_an_account">არ გაქვთ პაროლი?</string>
+    <string name="register">რეგისტრაცია</string>
+    <string name="registration_username">მომხარებელი</string>
+    <string name="registration_password">პაროლი</string>
+    <string name="repeat_password">გაიმეორეთ პაროლი</string>
+    <string name="back_button">უკან</string>
+    <string name="start_btn_txt">დაწყება</string>
+    <string name="profile_lang">ენა</string>
+    <string name="profile_log_out">გამოსვლა</string>
+</resources>

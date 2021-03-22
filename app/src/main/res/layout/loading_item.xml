@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="72dp">
+
+    <ProgressBar
+        android:id="@+id/loaderBar"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="@dimen/loading_pb_dimen"
+        android:layout_height="@dimen/loading_pb_dimen"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/orange_progressbar"
+        android:indeterminateTintMode="src_atop" />
+</FrameLayout>

@@ -6,6 +6,6 @@
         </shape>
     </item>
     <item
-        android:drawable="@drawable/bb_logos"
+        android:drawable="@drawable/main_screen_logo"
         android:gravity="center"/>
 </layer-list>

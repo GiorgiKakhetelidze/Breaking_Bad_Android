@@ -14,4 +14,10 @@
     <color name="gray_border">#707070</color>
     <color name="gray_input_text">#A2A2A2</color>
     <color name="gray_hav_acc">#A3FFFFFF</color>
+    <color name="gray_language_bar">#1A1A1A</color>
+    <color name="gray_700">#303033</color>
+    <color name="orange_progressbar">#FFB62F</color>
+    <color name="nav_bar_grey">#1A1A1A</color>
+    <color name="nav_bar_btn_grey">#C6C6C6</color>
+    <color name="transparent_black">#B31A1A1A</color>
 </resources>
