@@ -7,12 +7,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="0.5"
-        android:background="@color/gray_700"/>
-    
+        android:background="@color/gray_700" />
+
     <ProgressBar
         style="@style/Widget.AppCompat.ProgressBar"
-        android:layout_gravity="center"
         android:layout_width="@dimen/loading_pb_dimen"
-        android:layout_height="@dimen/loading_pb_dimen"/>
+        android:layout_height="@dimen/loading_pb_dimen"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/orange_progressbar"
+        android:indeterminateTintMode="src_atop" />
 
 </FrameLayout>

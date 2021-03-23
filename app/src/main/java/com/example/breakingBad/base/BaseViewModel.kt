@@ -8,7 +8,7 @@ import com.example.breakingBad.utils.Event
 import com.example.breakingBad.utils.UiErrorInterface
 
 abstract class BaseViewModel: ViewModel(), UiErrorInterface {
-    private val _loading = MutableLiveData<Boolean>(false)
+    private val _loading = MutableLiveData(false)
     val loading: LiveData<Boolean> get() = _loading
 
     private val _dialog = MutableLiveData<Event<DialogData>>()

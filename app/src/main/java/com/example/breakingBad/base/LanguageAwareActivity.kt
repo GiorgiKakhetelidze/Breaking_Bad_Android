@@ -16,6 +16,7 @@ abstract class LanguageAwareActivity : AppCompatActivity() {
     private lateinit var loadingView: View
 
     private lateinit var contentView: ContentFrameLayout
+    private var loading = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,10 +44,14 @@ abstract class LanguageAwareActivity : AppCompatActivity() {
             .show()
     }
     fun showLoading() {
+        if(loading) return
         contentView.addView(loadingView)
+        loading = true
     }
 
     fun hideLoading() {
+        if(!loading) return
         contentView.removeView(loadingView)
+        loading = false
     }
 }
