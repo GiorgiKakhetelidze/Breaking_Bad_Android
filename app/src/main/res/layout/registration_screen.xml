@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:gravity="center"
-        tools:text="@string/registration_username"
+        android:text="@string/registration_username"
         android:textAppearance="@style/Action_text"
         app:layout_constraintBottom_toTopOf="@+id/userNameInputFirst"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft" />
@@ -38,10 +38,8 @@
         tools:text="@string/username_here"
         app:layout_constraintBottom_toTopOf="@+id/userNameInputSecond"
         app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@+id/guidelineTop"
-        app:layout_constraintVertical_bias="0.52" />
+        app:layout_constraintTop_toBottomOf="@+id/guidelineTop" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/userNameSecondActionText"

@@ -35,4 +35,8 @@
     <string name="details_page_appearence">APPEARANCES</string>
     <string name="detail_page_details">DETAILS</string>
     <string name="detail_page_quotes">QUOTES</string>
+    <string name="registration_error_empty_username">Empty username</string>
+    <string name="registration_error_empty_name">Empty name</string>
+    <string name="registration_error_empty_password">Empty password</string>
+    <string name="registration_error_passwords_not_matching">Passwords not matching</string>
 </resources>

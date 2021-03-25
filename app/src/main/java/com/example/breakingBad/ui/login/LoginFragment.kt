@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.breakingBad.R
 import com.example.breakingBad.base.BaseFragment

@@ -20,10 +20,9 @@ class SearchFragment : Fragment() {
 
     private var binding: SearchScreenBinding? = null
     private var characterList = mutableListOf<Character>()
-    private val adapter = CardAdapter(characterList) {
+    private val adapter = CardAdapter() {
 
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,

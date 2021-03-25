@@ -4,14 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.example.breakingBad.R
+import com.example.breakingBad.base.BaseFragment
 import com.example.breakingBad.databinding.RegistrationScreenBinding
 
-class RegistrationFragment : Fragment() {
+class RegistrationFragment : BaseFragment() {
 
-    private var binding : RegistrationScreenBinding? = null
+    private var binding: RegistrationScreenBinding? = null
+    private val viewModel by viewModels<RegistrationViewModel>()
+
+    override fun getViewModelInstance() = viewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,13 +29,45 @@ class RegistrationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.backBtn?.setOnClickListener { activity?.onBackPressed() }
-        binding?.registerBtnRegister?.setOnClickListener { returnUsername() }
+        binding?.registerBtnRegister?.setOnClickListener {
+            viewModel.onRegister(
+                name = binding?.userNameInputFirst?.text,
+                username = binding?.userNameInputSecond?.text,
+                password = binding?.passwordInputFirst?.text,
+                repeatPassword = binding?.passwordInputSecond?.text
+            )
+        }
+        viewModel.validationError.observe(viewLifecycleOwner, this::showValidationError)
+        viewModel.registrationComplete.observe(viewLifecycleOwner) {
+            findNavController().popBackStack(R.id.loginFragment, true)
+        }
     }
 
-    private fun returnUsername() {
-        val username = binding?.userNameInputFirst?.text.toString()
-        setFragmentResult(KEY_DATA, bundleOf(KEY_USERNAME to username))
-        parentFragmentManager.popBackStack()
+
+    private fun showValidationError(error: RegistrationViewModel.ValidationError) {
+        binding?.apply {
+            when (error) {
+                RegistrationViewModel.ValidationError.EmptyUsername -> {
+                    userNameInputFirst.error = getString(R.string.registration_error_empty_username)
+                }
+                RegistrationViewModel.ValidationError.EmptyName -> {
+                    userNameInputSecond.error = getString(R.string.registration_error_empty_name)
+                }
+                RegistrationViewModel.ValidationError.EmptyPassword -> {
+                    passwordInputFirst.error = getString(R.string.registration_error_empty_password)
+                }
+                RegistrationViewModel.ValidationError.PasswordsNotMatching -> {
+                    passwordInputSecond.error =
+                        getString(R.string.registration_error_passwords_not_matching)
+                }
+                RegistrationViewModel.ValidationError.None -> {
+                    userNameInputFirst.error = null
+                    userNameInputSecond.error = null
+                    passwordInputFirst.error = null
+                    passwordInputSecond.error = null
+                }
+            }
+        }
     }
 
     companion object {
