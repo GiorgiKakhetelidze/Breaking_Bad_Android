@@ -7,21 +7,22 @@ import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.breakingBad.R
 import com.example.breakingBad.data.models.character.Character
 import com.example.breakingBad.databinding.SearchScreenBinding
+import com.example.breakingBad.ui.cardDetails.CharacterDetailsFragmentDirections
 import com.example.breakingBad.ui.home.CardAdapter
 import com.example.breakingBad.utils.CharacterDecorator
 
 class SearchFragment : Fragment() {
 
-    val viewModel : SearchViewModel by viewModels()
-
+    private val viewModel : SearchViewModel by viewModels()
     private var binding: SearchScreenBinding? = null
-    private var characterList = mutableListOf<Character>()
-    private val adapter = CardAdapter() {
-
+    private val adapter = CardAdapter("SearchFragment") {
+        val action = CharacterDetailsFragmentDirections.actionGlobalCharacterDetailsFragment(it)
+        activity?.findNavController(R.id.mainContainer)?.navigate(action)
     }
 
     override fun onCreateView(
@@ -48,9 +49,7 @@ class SearchFragment : Fragment() {
             )
         )
         viewModel.characters.observe(viewLifecycleOwner){
-            characterList.clear()
-            characterList.addAll(it)
-            adapter.notifyDataSetChanged()
+            adapter.characterList = it
         }
 
         binding?.searchInput?.doOnTextChanged { text, _, _, _ ->

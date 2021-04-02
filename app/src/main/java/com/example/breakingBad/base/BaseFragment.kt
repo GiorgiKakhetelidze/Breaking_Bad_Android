@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.breakingBad.R
+
 import com.example.breakingBad.utils.observeEvent
 
 abstract class BaseFragment : Fragment() {

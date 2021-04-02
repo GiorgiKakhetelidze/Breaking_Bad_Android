@@ -52,6 +52,7 @@ class ProfileFragment : BaseFragment() {
 
         binding?.logOutBtnView?.setOnClickListener {
             DataStore.authToken = null
+            findNavController().navigate(R.id.show_home)
         }
 
         viewModel.userProfile.observe(viewLifecycleOwner, this::showUserData)

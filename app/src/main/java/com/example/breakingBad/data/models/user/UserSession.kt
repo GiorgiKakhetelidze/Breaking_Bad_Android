@@ -1,8 +1,10 @@
 package com.example.breakingBad.data.models.user
 
 
+import androidx.annotation.Keep
 import com.squareup.moshi.Json
 
+@Keep
 data class UserSession(
     @Json(name = "accessToken")
     val accessToken: String,

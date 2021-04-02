@@ -14,8 +14,9 @@ import kotlinx.coroutines.withContext
 import java.lang.Exception
 
 class ProfileViewModel : BaseViewModel() {
-    init{
 
+    init{
+        getUserData()
     }
 
     private val _userProfile = MutableLiveData<UserProfile>()

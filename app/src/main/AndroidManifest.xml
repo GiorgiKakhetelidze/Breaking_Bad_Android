@@ -14,6 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BreakingBad"
         tools:ignore="AllowBackup">
+        <service android:name=".services.MusicService"/>
         <activity
             android:name="com.example.breakingBad.ui.main.MainActivity"
             android:screenOrientation="portrait">

@@ -15,6 +15,10 @@
         android:id="@+id/searchFragment"
         android:name="com.example.breakingBad.ui.search.SearchFragment"
         android:label="SearchFragment" />
+    <fragment
+        android:id="@+id/savedCharactersFragment"
+        android:name="com.example.breakingBad.ui.savedCharacters.SavedCharactersFragment"
+        android:label="SavedCharactersFragment" />
     <action
         android:id="@+id/show_home"
         app:destination="@id/homeFragment"
@@ -27,5 +31,10 @@
         android:id="@+id/show_search"
         app:destination="@id/searchFragment"
         app:popUpTo="@id/home_nav_graph" />
+    <action
+        android:id="@+id/show_saved"
+        app:destination="@id/savedCharactersFragment"
+        app:popUpTo="@id/home_nav_graph" />
+
 
 </navigation>

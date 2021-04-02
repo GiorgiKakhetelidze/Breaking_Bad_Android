@@ -20,4 +20,7 @@
     <color name="nav_bar_grey">#1A1A1A</color>
     <color name="nav_bar_btn_grey">#C6C6C6</color>
     <color name="transparent_black">#B31A1A1A</color>
+    <color name="quote_text_color">#CBCBCB</color>
+    <color name="season_episode_name">#5A5A5A</color>
+
 </resources>

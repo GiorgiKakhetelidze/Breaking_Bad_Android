@@ -2,19 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/home"
+        android:id="@+id/homeFragment"
         android:icon="@drawable/ic_home"
         android:title="@string/tab_home" />
     <item
-        android:id="@+id/search"
+        android:id="@+id/searchFragment"
         android:icon="@drawable/ic_search_icon"
         android:title="@string/tab_search" />
     <item
-        android:id="@+id/saved"
+        android:id="@+id/savedCharactersFragment"
         android:icon="@drawable/ic_download"
         android:title="@string/tab_saved" />
     <item
-        android:id="@+id/profile"
+        android:id="@+id/profileFragment"
         android:icon="@drawable/ic_profile"
         android:title="@string/tab_profile" />
 

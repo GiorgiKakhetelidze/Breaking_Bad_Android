@@ -21,7 +21,7 @@ class HomeFragment : BaseFragment() {
 
     override fun getViewModelInstance() = viewModel
 
-    private val adapter = CardAdapter {
+    private val adapter = CardAdapter("HomeFragment") {
         val action = CharacterDetailsFragmentDirections.actionGlobalCharacterDetailsFragment(it)
         activity?.findNavController(R.id.mainContainer)?.navigate(action)
     }
@@ -52,7 +52,7 @@ class HomeFragment : BaseFragment() {
                 )
             )
 
-            recycleView.addOnScrollListener(LoadMoreListener(){
+            recycleView.addOnScrollListener(LoadMoreListener() {
                 viewModel.onScrollEndReached()
             })
 
@@ -63,6 +63,7 @@ class HomeFragment : BaseFragment() {
             viewModel.characters.observe(viewLifecycleOwner) {
                 adapter.characterList = it
             }
+
             viewModel.loadingMore.observe(viewLifecycleOwner) {
                 adapter.loadingMore = it
                 if (swipeToRefresh.isRefreshing && it) swipeToRefresh.isRefreshing = false

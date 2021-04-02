@@ -43,7 +43,6 @@ class RegistrationFragment : BaseFragment() {
         }
     }
 
-
     private fun showValidationError(error: RegistrationViewModel.ValidationError) {
         binding?.apply {
             when (error) {

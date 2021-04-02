@@ -1,5 +1,6 @@
 package com.example.breakingBad.utils
 
+import org.json.JSONObject
 import retrofit2.HttpException
 import java.io.IOException
 import java.net.SocketTimeoutException
@@ -17,13 +18,23 @@ open class NetworkErrorHandler(private val uiComponent: UiErrorInterface) {
             is HttpException -> {
                 when (e.code()) {
                     401, 403 -> uiComponent.onUnauthorized()
-                    else -> uiComponent.onServerError(message = e.message())
+                    else -> parseNetworkError(e)
                 }
             }
         }
     }
 
+    private fun parseNetworkError(e: HttpException) {
+        val errorBody = e.response()?.errorBody()?.string()
+        try {
+            val message = JSONObject(errorBody!!).getString("message")
+            uiComponent.onServerError(message = message)
+        } catch (parse: Exception) {
+            uiComponent.onServerError(message = e.message())
+        }
+    }
 }
+
 
 interface UiErrorInterface {
 

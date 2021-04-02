@@ -7,11 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.breakingBad.R
 import com.example.breakingBad.databinding.NavHomeScreenBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class NavHomeFragment : Fragment(), BottomNavigationView.OnNavigationItemSelectedListener {
+class NavHomeFragment : Fragment() {
 
     private var binding: NavHomeScreenBinding? = null
 
@@ -26,25 +29,10 @@ class NavHomeFragment : Fragment(), BottomNavigationView.OnNavigationItemSelecte
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.homeNavTabBar?.setOnNavigationItemSelectedListener(this)
+
+        val navHostFragment = childFragmentManager.findFragmentById(R.id.homeNavContainer) as NavHostFragment
+        val navController = navHostFragment.navController
+        binding?.homeNavTabBar?.setupWithNavController(navController)
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        val controller = Navigation.findNavController(binding?.homeNavContainer!!)
-        when (item.itemId) {
-            R.id.home -> {
-                controller.navigate(R.id.show_home)
-            }
-            R.id.search -> {
-                controller.navigate(R.id.show_search)
-            }
-            R.id.saved -> {
-            }
-
-            R.id.profile -> {
-                controller.navigate(R.id.show_profile)
-            }
-        }
-        return true
-    }
 }

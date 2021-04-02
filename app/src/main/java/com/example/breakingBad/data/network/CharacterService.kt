@@ -1,7 +1,10 @@
 package com.example.breakingBad.data.network
 
 import com.example.breakingBad.data.models.character.Character
+import com.example.breakingBad.data.models.character.Quote
+import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface CharacterService {
@@ -16,5 +19,18 @@ interface CharacterService {
     ): MutableList<Character>
 
     @GET("characters")
-    suspend fun getCharacterByName(@Query("name") name : String) : MutableList<Character>
+    suspend fun getCharacterByName(@Query("name") name: String): MutableList<Character>
+
+    @GET("characters/{id}")
+    suspend fun getCharacterBydId(
+        @Path("id") id: Int,
+    ): MutableList<Character>
+
+    @GET("quotes")
+    suspend fun getAllQuotes(): MutableList<Quote>
+
+    @GET("quote")
+    suspend fun getQuotesByAuthor(
+        @Query("author",encoded = true) author: String
+    ): MutableList<Quote>
 }

@@ -32,11 +32,21 @@
     <string name="image_background_description">imageBackgroundDescription</string>
     <string name="image_character_description">imageCharacterDescription</string>
     <string name="character_details_add">Add</string>
-    <string name="details_page_appearence">APPEARANCES</string>
+    <string name="details_page_appearance">APPEARANCES</string>
     <string name="detail_page_details">DETAILS</string>
     <string name="detail_page_quotes">QUOTES</string>
     <string name="registration_error_empty_username">Empty username</string>
     <string name="registration_error_empty_name">Empty name</string>
     <string name="registration_error_empty_password">Empty password</string>
     <string name="registration_error_passwords_not_matching">Passwords not matching</string>
+    <string name="character_details_save">SAVE</string>
+    <string name="character_details_remove">REMOVE</string>
+    <string name="character_details_login">LOGIN</string>
+    <string name="details_page_birthday">Birthday</string>
+    <string name="details_page_status">Status</string>
+    <string name="details_page_portrayed">Portrayed</string>
+    <string name="common_yes">Yes</string>
+    <string name="common_no">No</string>
+    <string name="are_you_sure_delete">Remove From Saved?</string>
+
 </resources>

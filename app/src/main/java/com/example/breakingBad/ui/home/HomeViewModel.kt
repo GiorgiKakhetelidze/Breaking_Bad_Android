@@ -7,7 +7,10 @@ import com.example.breakingBad.R
 import com.example.breakingBad.base.BaseViewModel
 import com.example.breakingBad.base.DialogData
 import com.example.breakingBad.data.models.character.Character
+import com.example.breakingBad.data.models.character.Quote
 import com.example.breakingBad.data.network.NetworkClient
+import com.example.breakingBad.data.storage.DataStore
+import com.example.breakingBad.utils.handleNetworkError
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -33,6 +36,7 @@ class HomeViewModel : BaseViewModel() {
     }
 
     fun onRefresh() {
+        offset = 0
         _characters.postValue(emptyList())
         loadCharacters()
     }
@@ -47,9 +51,11 @@ class HomeViewModel : BaseViewModel() {
                         offset
                     )
                 }
+                DataStore.db.getCharacterDao().insert(data)
                 offset += data.size
                 _characters.postValue((_characters.value ?: emptyList()) + data)
                 noMoreCharacters = data.size != LIMIT
+
             } catch (e: Exception) {
                 showDialog(DialogData(title = R.string.common_error, message = e.message ?: ""))
             } finally {

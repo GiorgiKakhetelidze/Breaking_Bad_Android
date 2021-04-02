@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+
+    <ImageView
+        android:id="@+id/episodeItemView"
+        android:layout_width="140dp"
+        android:layout_height="89dp"
+        android:contentDescription="@string/img_description"
+        android:scaleType="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/episodeNameTextView"
+        style="@style/Text_Season"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/std_screen_insets"
+        android:layout_marginTop="@dimen/std_screen_insets"
+        android:gravity="start"
+        app:layout_constraintStart_toEndOf="@id/episodeItemView"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="NAME" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/episodeNumTextView"
+        style="@style/Episode_Num_Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:gravity="start"
+        app:layout_constraintStart_toEndOf="@id/episodeItemView"
+        app:layout_constraintTop_toBottomOf="@+id/episodeNameTextView"
+        tools:layout_editor_absoluteY="47dp"
+        tools:text="NAME" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

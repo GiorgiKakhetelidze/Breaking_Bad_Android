@@ -84,47 +84,67 @@
             style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@id/imgCharacterView"
+            app:layout_constraintBottom_toTopOf="@id/characterParticleTxtView"
             app:layout_constraintEnd_toEndOf="@id/guidelineRight"
             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
             tools:text="SurName" />
 
+        <TextView
+            android:id="@+id/characterParticleTxtView"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/characterNameTxtViewSecond"
+            app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+            app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+            tools:text="Particle" />
+
+        <TextView
+            android:id="@+id/characterNameTxtViewSecond"
+            style="@style/Text_Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/imgCharacterView"
+            app:layout_constraintEnd_toEndOf="@id/guidelineRight"
+            app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+            tools:text="Name" />
+
+
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/addRemoveBtn"
+            android:id="@+id/addRemoveLoginBtn"
             style="@style/Button_AddRemove"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:minWidth="155dp"
-            android:text="@string/character_details_add"
+            tools:text="@string/character_details_add"
             app:layout_constraintEnd_toEndOf="@id/guidelineRight"
             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-            app:layout_constraintTop_toBottomOf="@id/imgBackgroundView" />
+            app:layout_constraintTop_toBottomOf="@id/imgCharacterView" />
 
         <TextView
-            android:id="@+id/characterNickName"
+            android:id="@+id/characterNickNameTitle"
             style="@style/Action_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-            app:layout_constraintTop_toBottomOf="@id/addRemoveBtn"
+            app:layout_constraintTop_toBottomOf="@id/addRemoveLoginBtn"
             tools:text="NICKNAME" />
 
         <TextView
-            android:id="@+id/characterRank"
+            android:id="@+id/characterOccupation"
             style="@style/Text_Description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="13dp"
-            android:maxEms="12"
             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-            app:layout_constraintTop_toBottomOf="@id/characterNickName"
-            tools:text="High School Chemistry Teacher Meth King and Pin" />
+            app:layout_constraintTop_toBottomOf="@id/characterNickNameTitle"
+            tools:text="High School\nChemistry Teacher\nMeth King and Pin" />
 
         <TextView
-            android:id="@+id/details"
+            android:id="@+id/detailsTitle"
             style="@style/Action_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -132,7 +152,7 @@
             android:maxEms="12"
             android:text="@string/detail_page_details"
             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-            app:layout_constraintTop_toBottomOf="@id/characterRank" />
+            app:layout_constraintTop_toBottomOf="@id/characterOccupation" />
 
         <TextView
             android:id="@+id/birthdayLabel"
@@ -141,10 +161,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:maxEms="12"
             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-            app:layout_constraintTop_toBottomOf="@id/details"
-            tools:text="Birthday" />
+            app:layout_constraintTop_toBottomOf="@id/detailsTitle"
+            android:text="@string/details_page_birthday" />
 
         <TextView
             android:id="@+id/birthdayValue"
@@ -154,7 +173,7 @@
             android:layout_marginTop="10dp"
             android:maxEms="12"
             app:layout_constraintEnd_toEndOf="@id/guidelineRight"
-            app:layout_constraintTop_toBottomOf="@id/details"
+            app:layout_constraintTop_toBottomOf="@id/detailsTitle"
             tools:text="09-07-1958" />
 
         <TextView
@@ -167,7 +186,7 @@
             android:maxEms="12"
             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
             app:layout_constraintTop_toBottomOf="@id/birthdayLabel"
-            tools:text="Status" />
+            android:text="@string/details_page_status" />
 
         <TextView
             android:id="@+id/statusValue"
@@ -190,10 +209,10 @@
             android:maxEms="12"
             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
             app:layout_constraintTop_toBottomOf="@id/statusLabel"
-            tools:text="Portrayed" />
+            android:text="@string/details_page_portrayed" />
 
         <TextView
-            android:id="@+id/PortrayedValue"
+            android:id="@+id/portrayedValue"
             style="@style/Text_Description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -204,13 +223,13 @@
             tools:text="Portrayed Value" />
 
         <TextView
-            android:id="@+id/appearenceView"
+            android:id="@+id/appearanceTitle"
             style="@style/Action_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
             android:maxEms="12"
-            android:text="@string/details_page_appearence"
+            android:text="@string/details_page_appearance"
             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
             app:layout_constraintTop_toBottomOf="@id/portrayedLabel" />
 
@@ -218,60 +237,24 @@
             android:id="@+id/seasonScrollView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:layout_marginTop="12dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="@id/guidelineRight"
             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-            app:layout_constraintTop_toBottomOf="@id/appearenceView">
+            app:layout_constraintTop_toBottomOf="@id/appearanceTitle">
 
             <LinearLayout
-                android:id="@+id/horizonLinearView"
+                android:id="@+id/horizonLinearViewContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
+                android:layout_gravity="start"
                 android:orientation="horizontal">
 
-                <TextView
-                    style="@style/Text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:background="@drawable/season_bb_logo"
-                    android:gravity="center"
-                    tools:text="\nSEASON\n1" />
-
-                <TextView
-                    style="@style/Text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:background="@drawable/season_bb_logo"
-                    android:gravity="center"
-                    tools:text="\nSEASON\n2" />
-
-                <TextView
-                    style="@style/Text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:background="@drawable/season_bcs_logo"
-                    android:gravity="center"
-                    tools:text="\nSEASON\n2" />
-
-                <TextView
-                    style="@style/Text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:background="@drawable/season_bcs_logo"
-                    android:gravity="center"
-                    tools:text="\nSEASON\n2" />
             </LinearLayout>
         </HorizontalScrollView>
 
         <TextView
-            android:id="@+id/quotes"
+            android:id="@+id/quotesTitle"
             style="@style/Action_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -288,7 +271,7 @@
             android:layout_marginTop="10dp"
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-            app:layout_constraintTop_toBottomOf="@id/quotes"
+            app:layout_constraintTop_toBottomOf="@id/quotesTitle"
             app:layout_constraintEnd_toEndOf="@id/guidelineRight"/>
 
 

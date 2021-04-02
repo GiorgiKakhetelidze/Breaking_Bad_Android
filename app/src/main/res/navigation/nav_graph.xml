@@ -9,9 +9,15 @@
         android:label="Home" />
 
     <fragment
+        android:id="@+id/seasonFragment"
+        android:name="com.example.breakingBad.ui.season.SeasonFragment"
+        android:label="SeasonFragment" />
+
+    <fragment
         android:id="@+id/registrationFragment"
         android:name="com.example.breakingBad.ui.registration.RegistrationFragment"
         android:label="RegistrationFragment" />
+
 
     <action
         android:id="@+id/login"
@@ -31,8 +37,8 @@
             app:destination="@id/registrationFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left" />
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
 
@@ -41,12 +47,18 @@
         android:name="com.example.breakingBad.ui.cardDetails.CharacterDetailsFragment"
         android:label="CardDetailsFragment">
         <argument
-            android:name="data"
+            android:name="characters"
             app:argType="com.example.breakingBad.data.models.character.Character" />
     </fragment>
 
     <action
         android:id="@+id/action_global_characterDetailsFragment"
-        app:destination="@id/characterDetailsFragment"/>
+        app:destination="@id/characterDetailsFragment" />
+
+    <action
+        android:id="@+id/action_global_seasonFragment"
+        app:destination="@id/seasonFragment" />
+
+    <include app:graph="@navigation/home_nav_graph" />
 
 </navigation>
