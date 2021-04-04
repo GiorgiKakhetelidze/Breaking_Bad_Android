@@ -1,6 +1,7 @@
 package com.example.breakingBad.data.network
 
 import com.example.breakingBad.data.models.character.Character
+import com.example.breakingBad.data.models.character.Episode
 import com.example.breakingBad.data.models.character.Quote
 import retrofit2.Response
 import retrofit2.http.GET
@@ -33,4 +34,9 @@ interface CharacterService {
     suspend fun getQuotesByAuthor(
         @Query("author",encoded = true) author: String
     ): MutableList<Quote>
+
+    @GET("episodes")
+    suspend fun getEpisodesBySeries(
+        @Query("author",encoded = true) episode: String
+    ): MutableList<Episode>
 }

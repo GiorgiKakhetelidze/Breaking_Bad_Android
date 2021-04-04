@@ -22,15 +22,15 @@ class SavedCharactersViewModel : BaseViewModel() {
     val characters: LiveData<List<Character>> get() = _characters
 
     init {
-        getSavedCards()
+        getSavedCharacters()
     }
 
     fun onRefresh() {
         _characters.postValue(emptyList())
-        getSavedCards()
+        getSavedCharacters()
     }
 
-    fun getSavedCards() = viewModelScope.launch {
+    fun getSavedCharacters() = viewModelScope.launch {
         try {
             showLoading()
             val characterIds =

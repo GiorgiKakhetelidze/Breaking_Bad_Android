@@ -56,6 +56,7 @@ class ProfileFragment : BaseFragment() {
         }
 
         viewModel.userProfile.observe(viewLifecycleOwner, this::showUserData)
+
         viewModel.loginRequired.observe(viewLifecycleOwner) {
             activity?.findNavController(R.id.mainContainer)?.navigate(R.id.login)
         }

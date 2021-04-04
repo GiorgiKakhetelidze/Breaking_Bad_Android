@@ -8,19 +8,18 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.breakingBad.R
 import com.example.breakingBad.base.BaseFragment
 import com.example.breakingBad.base.BaseViewModel
 import com.example.breakingBad.data.models.character.Character
-import com.example.breakingBad.data.models.character.Quote
 import com.example.breakingBad.databinding.SavedCharactersScreenBinding
 import com.example.breakingBad.ui.cardDetails.CharacterDetailsFragmentDirections
 import com.example.breakingBad.ui.home.CardAdapter
 import com.example.breakingBad.ui.login.LoginViewModel
-import com.example.breakingBad.utils.CharacterDecorator
 import com.example.breakingBad.utils.SavedCharacterDecorator
 import com.example.breakingBad.utils.observeEvent
+import java.lang.RuntimeException
 
 class SavedCharactersFragment : BaseFragment() {
 
@@ -30,8 +29,10 @@ class SavedCharactersFragment : BaseFragment() {
     private val loginViewModel by activityViewModels<LoginViewModel>()
 
     private var adapter = CardAdapter("SavedCharactersFragment") {
-        val action = CharacterDetailsFragmentDirections.actionGlobalCharacterDetailsFragment(it)
-        activity?.findNavController(R.id.mainContainer)?.navigate(action)
+        if (it is Character) {
+            val action = CharacterDetailsFragmentDirections.actionGlobalCharacterDetailsFragment(it)
+            activity?.findNavController(R.id.mainContainer)?.navigate(action)
+        } else throw RuntimeException("Unknown argument type for DetailsFragment")
     }
 
     override fun onCreateView(
@@ -45,8 +46,7 @@ class SavedCharactersFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val layoutManager = GridLayoutManager(context, 1)
-        layoutManager.spanSizeLookup = CardAdapter.LoaderSpanSizeLookup(adapter)
+        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding?.apply {
             recycleView.layoutManager = layoutManager
             recycleView.adapter = adapter
@@ -74,7 +74,7 @@ class SavedCharactersFragment : BaseFragment() {
 
         loginViewModel.loginFlowFinished.observeEvent(viewLifecycleOwner) { loginSuccess ->
             if (loginSuccess)
-                viewModel.getSavedCards()
+                viewModel.getSavedCharacters()
             else
                 findNavController().navigate(R.id.show_home)
         }

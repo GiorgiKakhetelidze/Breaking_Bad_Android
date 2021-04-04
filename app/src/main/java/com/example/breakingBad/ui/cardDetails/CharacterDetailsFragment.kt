@@ -15,6 +15,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.breakingBad.R
 import com.example.breakingBad.base.BaseFragment
@@ -23,21 +25,36 @@ import com.example.breakingBad.data.models.character.Quote
 import com.example.breakingBad.databinding.AppearenceItemBinding
 import com.example.breakingBad.databinding.CharacterDetailScreenBinding
 import com.example.breakingBad.databinding.QuoteItemBinding
+import com.example.breakingBad.ui.home.CardAdapter
 import com.example.breakingBad.ui.login.LoginViewModel
+import com.example.breakingBad.ui.season.SeasonFragmentDirections
+import com.example.breakingBad.utils.SavedCharacterDecorator
 import com.example.breakingBad.utils.observeEvent
+import java.lang.RuntimeException
 
 class CharacterDetailsFragment : BaseFragment() {
 
     private var binding: CharacterDetailScreenBinding? = null
+
     private val characterDetailArg by navArgs<CharacterDetailsFragmentArgs>()
-    private val viewModel by viewModels<CharacterDetailsViewModel> {
-        CharacterDetailsViewModel.CharacterDetailsViewModelFactory(
-            characterDetailArg.characters,
-        )
-    }
+
     private val loginViewModel by activityViewModels<LoginViewModel>()
 
     override fun getViewModelInstance() = viewModel
+
+    private val viewModel by viewModels<CharacterDetailsViewModel> {
+        CharacterDetailsViewModel.CharacterDetailsViewModelFactory(
+            characterDetailArg.character,
+        )
+    }
+
+    private val adapter = CardAdapter("CharacterDetailsFragment") {
+        if (it is String) {
+            val action = SeasonFragmentDirections.actionGlobalSeasonFragment(it)
+            activity?.findNavController(R.id.mainContainer)?.navigate(action)
+        } else throw RuntimeException("Unknown argument type for SeasonFragment")
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,16 +70,22 @@ class CharacterDetailsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding?.apply {
+            recycleView.layoutManager = layoutManager
+            adapter.characterList = listOf(characterDetailArg.character)
+            recycleView.adapter = adapter
+            backBtn.setOnClickListener {
+                findNavController().popBackStack()
+            }
+
+            addRemoveLoginBtn.setOnClickListener {
+                viewModel.buttonClicked()
+            }
+        }
+
         viewModel.characterModel.observe(viewLifecycleOwner) {
             showCharacterCardData(it)
-        }
-
-        binding?.backBtn?.setOnClickListener {
-            findNavController().popBackStack()
-        }
-
-        binding?.addRemoveLoginBtn?.setOnClickListener {
-            viewModel.buttonClicked()
         }
 
         viewModel.characterSaved.observe(viewLifecycleOwner) {
@@ -152,43 +175,6 @@ class CharacterDetailsFragment : BaseFragment() {
             birthdayValue.text = character.birthday
             statusValue.text = character.status
             portrayedValue.text = character.portrayed
-        }
-        showAppearance(character)
-    }
-
-
-    @SuppressLint("SetTextI18n")
-    private fun showAppearance(character: Character) {
-        binding?.apply {
-            val betterCallSaulAppearance = character.betterCallSaulAppearance
-            val breakingBadAppearance = character.appearance
-
-            if (betterCallSaulAppearance.isNotEmpty()) {
-                betterCallSaulAppearance.forEach {
-                    val binding = AppearenceItemBinding.inflate(
-                        layoutInflater,
-                        horizonLinearViewContainer,
-                        false
-                    )
-                    binding.seasonTxtView.background =
-                        ResourcesCompat.getDrawable(resources, R.drawable.season_bcs_logo, null)
-                    binding.seasonTxtView.text = "\nSEASON\n$it"
-                    horizonLinearViewContainer.addView(binding.root)
-                }
-            }
-            if (breakingBadAppearance.isNotEmpty()) {
-                breakingBadAppearance.forEach {
-                    val binding = AppearenceItemBinding.inflate(
-                        layoutInflater,
-                        horizonLinearViewContainer,
-                        false
-                    )
-                    binding.seasonTxtView.background =
-                        ResourcesCompat.getDrawable(resources, R.drawable.season_bb_logo, null)
-                    binding.seasonTxtView.text = "\nSEASON\n$it"
-                    horizonLinearViewContainer.addView(binding.root)
-                }
-            }
         }
     }
 

@@ -11,12 +11,17 @@
     <fragment
         android:id="@+id/seasonFragment"
         android:name="com.example.breakingBad.ui.season.SeasonFragment"
-        android:label="SeasonFragment" />
+        android:label="SeasonFragment" >
+        <argument
+            android:name="str"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/registrationFragment"
         android:name="com.example.breakingBad.ui.registration.RegistrationFragment"
-        android:label="RegistrationFragment" />
+        android:label="RegistrationFragment" >
+    </fragment>
 
 
     <action
@@ -47,7 +52,7 @@
         android:name="com.example.breakingBad.ui.cardDetails.CharacterDetailsFragment"
         android:label="CardDetailsFragment">
         <argument
-            android:name="characters"
+            android:name="character"
             app:argType="com.example.breakingBad.data.models.character.Character" />
     </fragment>
 

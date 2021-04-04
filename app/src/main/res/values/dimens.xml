@@ -5,6 +5,7 @@
     <dimen name="add_remove_button_width">35dp</dimen>
     <dimen name="input_button_corner">12dp</dimen>
     <dimen name="std_screen_insets">20dp</dimen>
+    <dimen name="std_plus_screen_insets">30dp</dimen>
     <dimen name="std_Top_screen_inset">300dp</dimen>
     <dimen name="edit_text_padding">16dp</dimen>
     <dimen name="std_vertical_margin">16dp</dimen>

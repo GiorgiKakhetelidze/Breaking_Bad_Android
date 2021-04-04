@@ -117,10 +117,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:minWidth="155dp"
-            tools:text="@string/character_details_add"
             app:layout_constraintEnd_toEndOf="@id/guidelineRight"
             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-            app:layout_constraintTop_toBottomOf="@id/imgCharacterView" />
+            app:layout_constraintTop_toBottomOf="@id/imgCharacterView"
+            tools:text="@string/character_details_add" />
 
         <TextView
             android:id="@+id/characterNickNameTitle"
@@ -161,9 +161,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
+            android:text="@string/details_page_birthday"
             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-            app:layout_constraintTop_toBottomOf="@id/detailsTitle"
-            android:text="@string/details_page_birthday" />
+            app:layout_constraintTop_toBottomOf="@id/detailsTitle" />
 
         <TextView
             android:id="@+id/birthdayValue"
@@ -184,9 +184,9 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="8dp"
             android:maxEms="12"
+            android:text="@string/details_page_status"
             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-            app:layout_constraintTop_toBottomOf="@id/birthdayLabel"
-            android:text="@string/details_page_status" />
+            app:layout_constraintTop_toBottomOf="@id/birthdayLabel" />
 
         <TextView
             android:id="@+id/statusValue"
@@ -207,9 +207,9 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="8dp"
             android:maxEms="12"
+            android:text="@string/details_page_portrayed"
             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-            app:layout_constraintTop_toBottomOf="@id/statusLabel"
-            android:text="@string/details_page_portrayed" />
+            app:layout_constraintTop_toBottomOf="@id/statusLabel" />
 
         <TextView
             android:id="@+id/portrayedValue"
@@ -233,25 +233,16 @@
             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
             app:layout_constraintTop_toBottomOf="@id/portrayedLabel" />
 
-        <HorizontalScrollView
-            android:id="@+id/seasonScrollView"
-            android:layout_width="0dp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="15dp"
             android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/quotesTitle"
             app:layout_constraintEnd_toEndOf="@id/guidelineRight"
             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-            app:layout_constraintTop_toBottomOf="@id/appearanceTitle">
-
-            <LinearLayout
-                android:id="@+id/horizonLinearViewContainer"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="start"
-                android:orientation="horizontal">
-
-            </LinearLayout>
-        </HorizontalScrollView>
+            app:layout_constraintTop_toBottomOf="@+id/appearanceTitle" />
 
         <TextView
             android:id="@+id/quotesTitle"
@@ -262,7 +253,7 @@
             android:maxEms="12"
             android:text="@string/detail_page_quotes"
             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-            app:layout_constraintTop_toBottomOf="@id/seasonScrollView" />
+            app:layout_constraintTop_toBottomOf="@id/recycleView" />
 
         <LinearLayout
             android:id="@+id/quotesContainer"
@@ -270,9 +261,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="@id/guidelineRight"
             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-            app:layout_constraintTop_toBottomOf="@id/quotesTitle"
-            app:layout_constraintEnd_toEndOf="@id/guidelineRight"/>
+            app:layout_constraintTop_toBottomOf="@id/quotesTitle" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

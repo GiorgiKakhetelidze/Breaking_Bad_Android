@@ -1,10 +1,8 @@
 package com.example.breakingBad.ui.main
 
-import android.content.Intent
 import android.os.Bundle
 import com.example.breakingBad.base.LanguageAwareActivity
 import com.example.breakingBad.databinding.MainActivityBinding
-import com.example.breakingBad.services.MusicService
 
 
 class MainActivity : LanguageAwareActivity() {

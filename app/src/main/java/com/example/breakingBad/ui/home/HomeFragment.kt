@@ -9,10 +9,12 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.breakingBad.R
 import com.example.breakingBad.base.BaseFragment
+import com.example.breakingBad.data.models.character.Character
 import com.example.breakingBad.databinding.*
 import com.example.breakingBad.ui.cardDetails.CharacterDetailsFragmentDirections
 import com.example.breakingBad.utils.CharacterDecorator
 import com.example.breakingBad.utils.LoadMoreListener
+import java.lang.RuntimeException
 
 class HomeFragment : BaseFragment() {
 
@@ -22,8 +24,10 @@ class HomeFragment : BaseFragment() {
     override fun getViewModelInstance() = viewModel
 
     private val adapter = CardAdapter("HomeFragment") {
-        val action = CharacterDetailsFragmentDirections.actionGlobalCharacterDetailsFragment(it)
-        activity?.findNavController(R.id.mainContainer)?.navigate(action)
+        if (it is Character) {
+            val action = CharacterDetailsFragmentDirections.actionGlobalCharacterDetailsFragment(it)
+            activity?.findNavController(R.id.mainContainer)?.navigate(action)
+        } else throw RuntimeException("Unknown argument type for DetailsFragment")
     }
 
     override fun onCreateView(

@@ -9,11 +9,14 @@
 
     <ImageView
         android:id="@+id/episodeItemView"
-        android:layout_width="140dp"
-        android:layout_height="89dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:contentDescription="@string/img_description"
+        android:layout_marginTop="@dimen/std_vertical_margin_half"
+        android:layout_marginStart="@dimen/std_screen_insets"
         android:scaleType="center"
         app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/season_pilot"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -22,8 +25,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/std_screen_insets"
-        android:layout_marginTop="@dimen/std_screen_insets"
-        android:gravity="start"
+        android:layout_marginTop="@dimen/std_plus_screen_insets"
+        android:ellipsize="end"
         app:layout_constraintStart_toEndOf="@id/episodeItemView"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="NAME" />
@@ -34,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:gravity="start"
+        android:ellipsize="end"
         app:layout_constraintStart_toEndOf="@id/episodeItemView"
         app:layout_constraintTop_toBottomOf="@+id/episodeNameTextView"
         tools:layout_editor_absoluteY="47dp"
