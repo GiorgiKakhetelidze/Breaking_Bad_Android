@@ -13,6 +13,7 @@ object DataStore {
 
     private const val KEY_LANGUAGE = "key_language"
     private const val KEY_TOKEN = "key_token"
+    private const val KEY_LAST_TIME_SAVED_CARDS_FETCHED = "key_last_time_saved_cards_fetched"
 
     private var sharedPreferences: SharedPreferences? = null
     private var dataBase: CharacterDb? = null
@@ -42,5 +43,15 @@ object DataStore {
         get() {
             return (sharedPreferences ?: throw RuntimeException("not initialized!!"))
                 .getString(KEY_TOKEN, null)
+        }
+
+    var lastTimeSavedCardsFetched: Long
+        @SuppressLint("ApplySharedPref")
+        set(value) {
+            sharedPreferences?.edit()?.putLong(KEY_LAST_TIME_SAVED_CARDS_FETCHED, value)?.commit()
+        }
+        get() {
+            return (sharedPreferences ?: throw RuntimeException("not initialized!!"))
+                .getLong(KEY_LAST_TIME_SAVED_CARDS_FETCHED, 0)
         }
 }

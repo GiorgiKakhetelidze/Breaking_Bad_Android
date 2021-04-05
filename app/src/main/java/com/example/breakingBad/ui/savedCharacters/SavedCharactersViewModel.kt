@@ -6,6 +6,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.breakingBad.base.BaseViewModel
 import com.example.breakingBad.data.models.character.Character
 import com.example.breakingBad.data.network.NetworkClient
+import com.example.breakingBad.data.repository.Repository
+import com.example.breakingBad.data.storage.DataStore
+import com.example.breakingBad.data.storage.db.entities.SavedCharacterIdEntity
 import com.example.breakingBad.utils.Event
 import com.example.breakingBad.utils.handleNetworkError
 import kotlinx.coroutines.Dispatchers
@@ -33,11 +36,15 @@ class SavedCharactersViewModel : BaseViewModel() {
     fun getSavedCharacters() = viewModelScope.launch {
         try {
             showLoading()
-            val characterIds =
-                withContext(Dispatchers.IO) { NetworkClient.userService.getUserCharacters() }
             val characters = withContext(Dispatchers.IO) {
+                val characterIds = if (Repository.checkSavedIdsValidity())
+                    Repository.getLocalSavedCharacterIds()
+                else
+                    Repository.updateRemoteSavedCharacters()
+
+
                 characterIds.map {
-                    NetworkClient.characterService.getCharacterBydId(it).first()
+                    Repository.getLocalCharacterById(it) ?: Repository.getRemoteCharacterById(it)
                 }
             }
             _characters.postValue(characters)

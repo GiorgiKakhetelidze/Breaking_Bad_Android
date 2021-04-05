@@ -2,10 +2,8 @@ package com.example.breakingBad.ui.season
 
 import androidx.lifecycle.*
 import com.example.breakingBad.base.BaseViewModel
-import com.example.breakingBad.data.models.character.Character
 import com.example.breakingBad.data.models.character.Episode
 import com.example.breakingBad.data.network.NetworkClient
-import com.example.breakingBad.ui.cardDetails.CharacterDetailsViewModel
 import com.example.breakingBad.utils.Event
 import com.example.breakingBad.utils.handleNetworkError
 import kotlinx.coroutines.Dispatchers
@@ -49,8 +47,8 @@ class SeasonViewModel(private val seasonInf: String) : BaseViewModel() {
     private fun getEpisodesBySeason(allEpisodes: MutableList<Episode>): List<Episode> {
         val listInfo = seasonInf.split("|")
         val seasonNumber = listInfo[1].toInt()
-        if (listInfo.size == 2) {
-            return allEpisodes.filter {
+        return if (listInfo.size == 2) {
+            allEpisodes.filter {
                 it.season == seasonNumber
             }
         } else
@@ -62,9 +60,9 @@ class SeasonViewModel(private val seasonInf: String) : BaseViewModel() {
         if (listInfo.size == 2) {
             val isBcsSeries = listInfo.first().toBoolean()
             return if (isBcsSeries)
-                "Better+Call+Soul"
+                BCS_SERIES
             else
-                "Breaking+Bad"
+                BB_SERIES
         } else
             throw RuntimeException("Unknown Series")
     }
@@ -81,5 +79,10 @@ class SeasonViewModel(private val seasonInf: String) : BaseViewModel() {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return SeasonViewModel(seasonInf) as T
         }
+    }
+
+    companion object {
+        const val BCS_SERIES = "Better+Call+Saul"
+        const val BB_SERIES = "Breaking+Bad"
     }
 }

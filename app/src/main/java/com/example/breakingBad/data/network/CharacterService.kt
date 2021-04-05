@@ -37,6 +37,6 @@ interface CharacterService {
 
     @GET("episodes")
     suspend fun getEpisodesBySeries(
-        @Query("author",encoded = true) episode: String
+        @Query("series",encoded = true) episode: String
     ): MutableList<Episode>
 }

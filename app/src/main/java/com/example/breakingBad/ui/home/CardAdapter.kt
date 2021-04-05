@@ -170,12 +170,16 @@ class CardAdapter(
     }
 
     override fun getItemCount() : Int {
-        return when {
-            episodeList.isNotEmpty() -> episodeList.size + 1
-            characterList.size > 1 || characterList.isEmpty() -> characterList.size + 1
-            characterList.first().betterCallSaulAppearance.isNotEmpty() && characterList.first().appearance.isEmpty() -> characterList.first().betterCallSaulAppearance.size + 1
-            else -> characterList.first().appearance.size + 1
-        }
+        return if(episodeList.isNotEmpty())
+            episodeList.size + 1
+        else if(characterList.size == 1 && characterList.first().appearance.isNotEmpty() && characterList.first().betterCallSaulAppearance.isEmpty())
+            characterList.first().appearance.size + 1
+        else if(characterList.size == 1 && characterList.first().betterCallSaulAppearance.isNotEmpty() && characterList.first().appearance.isEmpty())
+            characterList.first().betterCallSaulAppearance.size + 1
+        else if(characterList.size == 1 && characterList.first().betterCallSaulAppearance.isNotEmpty() && characterList.first().appearance.isNotEmpty())
+            (characterList.first().betterCallSaulAppearance + characterList.first().appearance).size + 1
+        else
+            characterList.size + 1
     }
 
 
