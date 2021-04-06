@@ -60,6 +60,7 @@ class SavedCharactersFragment : BaseFragment() {
             )
             swipeToRefresh.setOnRefreshListener {
                 viewModel.onRefresh()
+                swipeToRefresh.isRefreshing = false
             }
         }
 

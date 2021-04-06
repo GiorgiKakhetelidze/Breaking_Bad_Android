@@ -20,4 +20,5 @@ interface CharacterDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(character: List<Character>)
+
 }

@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.breakingBad.R
 import com.example.breakingBad.base.BaseFragment
+import com.example.breakingBad.data.storage.DataStore
 import com.example.breakingBad.databinding.LoginScreenBinding
 import com.example.breakingBad.ui.registration.RegistrationFragment
 
@@ -49,6 +50,7 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
         viewModel.loginSuccess.observe(viewLifecycleOwner) {
             findNavController().popBackStack()
         }
+        viewModel.loginFragmentStarted()
     }
 
     override fun onClick(v: View?) {
@@ -62,7 +64,7 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
     }
 
     override fun onDestroy() {
-        viewModel.fragmentDestroyed()
+        viewModel.loginFragmentDestroyed()
         super.onDestroy()
     }
 

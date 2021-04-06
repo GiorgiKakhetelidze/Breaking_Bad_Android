@@ -51,13 +51,14 @@ class ProfileFragment : BaseFragment() {
         }
 
         binding?.logOutBtnView?.setOnClickListener {
-            DataStore.authToken = null
+            loginViewModel.logOut()
             findNavController().navigate(R.id.show_home)
         }
 
         viewModel.userProfile.observe(viewLifecycleOwner, this::showUserData)
 
         viewModel.loginRequired.observe(viewLifecycleOwner) {
+            loginViewModel.logOut()
             activity?.findNavController(R.id.mainContainer)?.navigate(R.id.login)
         }
         loginViewModel.loginFlowFinished.observeEvent(viewLifecycleOwner) { loginSuccess ->

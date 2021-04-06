@@ -8,8 +8,10 @@ class IntListTypeConverter {
     fun stringToIntList(string: String): List<Int> {
         val stringList = string.split("|")
         val convertedList = mutableListOf<Int>()
-        stringList.forEach {
-            convertedList.add(it.toInt())
+        if(string.isNotEmpty()){
+            stringList.forEach {
+                convertedList.add(it.toInt())
+            }
         }
         return convertedList.toList()
     }

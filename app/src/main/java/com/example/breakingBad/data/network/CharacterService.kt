@@ -17,7 +17,7 @@ interface CharacterService {
     suspend fun getLimitedCharacters(
         @Query("limit") limit: Int,
         @Query("offset") offset: Int
-    ): MutableList<Character>
+    ): List<Character>
 
     @GET("characters")
     suspend fun getCharacterByName(@Query("name") name: String): MutableList<Character>

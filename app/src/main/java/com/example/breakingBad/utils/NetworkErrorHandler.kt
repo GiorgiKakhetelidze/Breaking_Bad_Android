@@ -21,6 +21,7 @@ open class NetworkErrorHandler(private val uiComponent: UiErrorInterface) {
                     else -> parseNetworkError(e)
                 }
             }
+            else -> throw e
         }
     }
 

@@ -5,9 +5,11 @@ import com.example.breakingBad.base.BaseViewModel
 import com.example.breakingBad.data.models.character.Character
 import com.example.breakingBad.data.models.character.Quote
 import com.example.breakingBad.data.network.NetworkClient
+import com.example.breakingBad.data.repository.Repository
 import com.example.breakingBad.utils.Event
 import com.example.breakingBad.utils.handleNetworkError
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -17,8 +19,12 @@ class CharacterDetailsViewModel(private val characters: Character) :
     private val _characterModel = MutableLiveData(characters)
     val characterModel: LiveData<Character> get() = _characterModel
 
-    private val _characterSaved = MutableLiveData<CharacterSavedState>(CharacterSavedState.Unknown)
-    val characterSaved: LiveData<CharacterSavedState> get() = _characterSaved
+    val characterSaved = Repository.getLocalSavedCharactersFlow()
+        .map { characterIds ->
+            if (characterIds.contains(characters.charId))
+                CharacterSavedState.Saved
+            else CharacterSavedState.NotSaved
+        }.asLiveData(viewModelScope.coroutineContext + Dispatchers.IO)
 
     private val _loginRequired = MutableLiveData<Event<Unit>>()
     val loginRequired: LiveData<Event<Unit>> get() = _loginRequired
@@ -34,14 +40,11 @@ class CharacterDetailsViewModel(private val characters: Character) :
         getCharacterQuotes()
     }
 
-    fun determineCardSavedState() = viewModelScope.launch {
+    fun determineCardSavedState() = viewModelScope.launch(Dispatchers.IO) {
         try {
-            showLoading()
-            val cardIds =
-                withContext(Dispatchers.IO) { NetworkClient.userService.getUserCharacters() }
-            val state =
-                if (cardIds.contains(characters.charId)) CharacterSavedState.Saved else CharacterSavedState.NotSaved
-            _characterSaved.postValue(state)
+            if (!Repository.checkSavedIdsValidity())
+                showLoading()
+            Repository.updateRemoteSavedCharacters()
         } catch (e: Exception) {
             handleNetworkError(e)
         } finally {
@@ -51,7 +54,7 @@ class CharacterDetailsViewModel(private val characters: Character) :
 
     fun buttonClicked() {
         when (characterSaved.value) {
-            CharacterSavedState.Saved ->  _showConfirmDialog.postValue(Event(Unit))
+            CharacterSavedState.Saved -> _showConfirmDialog.postValue(Event(Unit))
             CharacterSavedState.NotSaved -> saveCard()
             CharacterSavedState.Unknown -> _loginRequired.postValue(Event(Unit))
         }
@@ -60,8 +63,7 @@ class CharacterDetailsViewModel(private val characters: Character) :
     private fun saveCard() = viewModelScope.launch(Dispatchers.IO) {
         try {
             showLoading()
-            NetworkClient.userService.saveUserCharacter(characters.charId)
-            _characterSaved.postValue(CharacterSavedState.Saved)
+            Repository.saveCard(characters)
         } catch (e: Exception) {
             handleNetworkError(e)
         } finally {
@@ -76,8 +78,7 @@ class CharacterDetailsViewModel(private val characters: Character) :
     private fun deleteCard() = viewModelScope.launch(Dispatchers.IO) {
         try {
             showLoading()
-            NetworkClient.userService.deleteUserCharacter(characters.charId)
-            _characterSaved.postValue(CharacterSavedState.NotSaved)
+            Repository.deleteCard(characters)
         } catch (e: Exception) {
             handleNetworkError(e)
         } finally {

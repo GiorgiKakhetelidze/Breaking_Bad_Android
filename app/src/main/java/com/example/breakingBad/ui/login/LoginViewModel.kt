@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.example.breakingBad.R
 import com.example.breakingBad.base.BaseViewModel
 import com.example.breakingBad.data.network.NetworkClient
+import com.example.breakingBad.data.repository.Repository
 import com.example.breakingBad.data.storage.DataStore
 import com.example.breakingBad.utils.Event
 import com.example.breakingBad.utils.handleNetworkError
@@ -22,7 +23,7 @@ class LoginViewModel : BaseViewModel() {
     val loginFlowFinished: LiveData<Event<Boolean>> get() = _loginFlowFinished
 
     fun login(username: CharSequence?, password: CharSequence?) = viewModelScope.launch {
-        DataStore.authToken = null
+        withContext(Dispatchers.IO) { clearData() }
         if (username.isNullOrBlank() || password.isNullOrBlank()) {
             _inputError.postValue(R.string.login_toast)
             return@launch
@@ -44,8 +45,23 @@ class LoginViewModel : BaseViewModel() {
         }
     }
 
-    fun fragmentDestroyed() {
+    private suspend fun clearData() {
+        DataStore.authToken = null
+        Repository.clearSavedCards()
+        Repository.invalidateSavedIds()
+        Repository.clearProfile()
+    }
+
+    fun logOut() = viewModelScope.launch(Dispatchers.IO) {
+        clearData()
+    }
+
+    internal fun loginFragmentDestroyed() {
         _loginFlowFinished.postValue(Event(!DataStore.authToken.isNullOrBlank()))
+    }
+
+    internal fun loginFragmentStarted() {
+        DataStore.authToken = null
     }
 
     override fun onUnauthorized() {
