@@ -9,9 +9,18 @@
         android:label="Home" />
 
     <fragment
+        android:id="@+id/episodeDetailsFragment"
+        android:name="com.example.breakingBad.ui.episodeDetails.EpisodeDetailsFragment"
+        android:label="EpisodeDetailsFragment">
+        <argument
+            android:name="episode"
+            app:argType="com.example.breakingBad.data.models.character.Episode" />
+    </fragment>
+
+    <fragment
         android:id="@+id/seasonFragment"
         android:name="com.example.breakingBad.ui.season.SeasonFragment"
-        android:label="SeasonFragment" >
+        android:label="SeasonFragment">
         <argument
             android:name="str"
             app:argType="string" />
@@ -20,8 +29,7 @@
     <fragment
         android:id="@+id/registrationFragment"
         android:name="com.example.breakingBad.ui.registration.RegistrationFragment"
-        android:label="RegistrationFragment" >
-    </fragment>
+        android:label="RegistrationFragment" />
 
 
     <action
@@ -63,6 +71,10 @@
     <action
         android:id="@+id/action_global_seasonFragment"
         app:destination="@id/seasonFragment" />
+
+    <action
+        android:id="@+id/action_global_episodeFragment"
+        app:destination="@id/episodeDetailsFragment" />
 
     <include app:graph="@navigation/home_nav_graph" />
 

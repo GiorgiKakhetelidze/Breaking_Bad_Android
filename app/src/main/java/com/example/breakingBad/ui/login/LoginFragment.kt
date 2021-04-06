@@ -10,9 +10,11 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.breakingBad.R
 import com.example.breakingBad.base.BaseFragment
+import com.example.breakingBad.base.hideKeyboard
 import com.example.breakingBad.data.storage.DataStore
 import com.example.breakingBad.databinding.LoginScreenBinding
 import com.example.breakingBad.ui.registration.RegistrationFragment
+import com.example.breakingBad.utils.observeEvent
 
 
 class LoginFragment : BaseFragment(), View.OnClickListener {
@@ -47,13 +49,14 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
         viewModel.inputError.observe(viewLifecycleOwner) {
             binding?.passwordInput?.error = getString(it)
         }
-        viewModel.loginSuccess.observe(viewLifecycleOwner) {
+        viewModel.loginSuccess.observeEvent(viewLifecycleOwner) {
             findNavController().popBackStack()
         }
         viewModel.loginFragmentStarted()
     }
 
     override fun onClick(v: View?) {
+        hideKeyboard()
         when (v) {
             binding?.registerBtnLogin -> startRegistration()
             binding?.loginButton -> viewModel.login(

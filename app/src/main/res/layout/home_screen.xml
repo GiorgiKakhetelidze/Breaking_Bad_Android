@@ -20,15 +20,14 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeToRefresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/bottom_top_fragment_space"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/std_vertical_margin_half"
         app:layout_constraintTop_toBottomOf="@+id/charTitleTxtView">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycleView"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="15dp"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

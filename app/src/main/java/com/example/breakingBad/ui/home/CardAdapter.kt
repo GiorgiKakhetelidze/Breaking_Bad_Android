@@ -51,7 +51,10 @@ class CardAdapter(
                 val str = v.tag as String
                 onCharacterClick.invoke(str)
             }
-            else -> throw RuntimeException("ClickListener is not specified")
+            is Episode -> {
+                val episode = v.tag as Episode
+                onCharacterClick.invoke(episode)
+            }
         }
     }
 
@@ -87,7 +90,7 @@ class CardAdapter(
             VIEW_TYPE_SEASON -> {
                 SeasonViewHolder(
                     binding = SeasonEpisodeItemBinding.inflate(LayoutInflater.from(parent.context)),
-                    //onClickListener = onClickListener
+                    onClickListener = onClickListener
                 )
             }
             VIEW_TYPE_APPEARANCE -> {
@@ -155,6 +158,7 @@ class CardAdapter(
                 val item = episodeList[position]
                 holder.binding.episodeNumTextView.text = "Episodes" + item.season.toString()
                 holder.binding.episodeNameTextView.text = item.title
+                holder.binding.root.tag = item
                 if (item.title == "Pilot")
                     Glide.with(holder.itemView).load(R.drawable.season_pilot)
                         .into(holder.binding.episodeItemView)
@@ -169,14 +173,14 @@ class CardAdapter(
         }
     }
 
-    override fun getItemCount() : Int {
-        return if(episodeList.isNotEmpty())
+    override fun getItemCount(): Int {
+        return if (episodeList.isNotEmpty())
             episodeList.size + 1
-        else if(characterList.size == 1 && characterList.first().appearance.isNotEmpty() && characterList.first().betterCallSaulAppearance.isEmpty())
+        else if (characterList.size == 1 && characterList.first().appearance.isNotEmpty() && characterList.first().betterCallSaulAppearance.isEmpty())
             characterList.first().appearance.size + 1
-        else if(characterList.size == 1 && characterList.first().betterCallSaulAppearance.isNotEmpty() && characterList.first().appearance.isEmpty())
+        else if (characterList.size == 1 && characterList.first().betterCallSaulAppearance.isNotEmpty() && characterList.first().appearance.isEmpty())
             characterList.first().betterCallSaulAppearance.size + 1
-        else if(characterList.size == 1 && characterList.first().betterCallSaulAppearance.isNotEmpty() && characterList.first().appearance.isNotEmpty())
+        else if (characterList.size == 1 && characterList.first().betterCallSaulAppearance.isNotEmpty() && characterList.first().appearance.isNotEmpty())
             (characterList.first().betterCallSaulAppearance + characterList.first().appearance).size + 1
         else
             characterList.size + 1
@@ -219,12 +223,12 @@ class CardAdapter(
 
     class SeasonViewHolder(
         val binding: SeasonEpisodeItemBinding,
-        // onClickListener: View.OnClickListener
+        onClickListener: View.OnClickListener
     ) :
         RecyclerView.ViewHolder(binding.root) {
-        /*    init {
-                binding.root.setOnClickListener(onClickListener)
-            }*/
+        init {
+            binding.root.setOnClickListener(onClickListener)
+        }
     }
 
     class SavedCharacterViewHolder(

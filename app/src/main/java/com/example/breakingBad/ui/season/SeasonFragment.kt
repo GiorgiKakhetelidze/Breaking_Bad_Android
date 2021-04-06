@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.breakingBad.R
 import com.example.breakingBad.base.BaseFragment
 import com.example.breakingBad.base.BaseViewModel
+import com.example.breakingBad.data.models.character.Episode
 import com.example.breakingBad.databinding.SeasonScreenBinding
+import com.example.breakingBad.ui.episodeDetails.EpisodeDetailsFragmentDirections
 import com.example.breakingBad.ui.home.CardAdapter
 import com.example.breakingBad.utils.observeEvent
 
@@ -29,10 +31,10 @@ class SeasonFragment : BaseFragment() {
     override fun getViewModelInstance(): BaseViewModel = viewModel
 
     private var adapter = CardAdapter("SeasonFragment") {
-/*        if(it is String){
-            val action = SeasonFragmentDirections.actionGlobalSeasonFragment(it)
+        if(it is Episode){
+            val action = EpisodeDetailsFragmentDirections.actionGlobalEpisodeFragment(it)
             activity?.findNavController(R.id.mainContainer)?.navigate(action)
-        }else throw RuntimeException("Unknown argument type for SeasonFragment")*/
+        }else throw RuntimeException("Unknown argument type for SeasonFragment")
     }
 
     override fun onCreateView(
