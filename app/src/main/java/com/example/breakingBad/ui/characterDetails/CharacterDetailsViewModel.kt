@@ -1,4 +1,4 @@
-package com.example.breakingBad.ui.cardDetails
+package com.example.breakingBad.ui.characterDetails
 
 import androidx.lifecycle.*
 import com.example.breakingBad.base.BaseViewModel
@@ -11,7 +11,6 @@ import com.example.breakingBad.utils.handleNetworkError
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class CharacterDetailsViewModel(private val characters: Character) :
     BaseViewModel() {

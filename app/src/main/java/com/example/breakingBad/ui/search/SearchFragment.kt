@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.breakingBad.R
 import com.example.breakingBad.data.models.character.Character
 import com.example.breakingBad.databinding.SearchScreenBinding
-import com.example.breakingBad.ui.cardDetails.CharacterDetailsFragmentDirections
+import com.example.breakingBad.ui.characterDetails.CharacterDetailsFragmentDirections
 import com.example.breakingBad.ui.home.CardAdapter
 import com.example.breakingBad.utils.CharacterDecorator
 import java.lang.RuntimeException

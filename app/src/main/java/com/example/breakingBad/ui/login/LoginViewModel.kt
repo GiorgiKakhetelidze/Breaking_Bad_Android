@@ -30,13 +30,12 @@ class LoginViewModel : BaseViewModel() {
         }
         showLoading()
         try {
-            val response = withContext(Dispatchers.IO) {
-                NetworkClient.userService.login(
+            withContext(Dispatchers.IO) {
+                Repository.loginAndSetToken(
                     username = username.toString(),
                     password = password.toString()
                 )
             }
-            DataStore.authToken = response.accessToken
             _loginSuccess.postValue(Event(Unit))
         } catch (e: Exception) {
             handleNetworkError(e)

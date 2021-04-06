@@ -1,6 +1,7 @@
 package com.example.breakingBad.data.repository
 
 import com.example.breakingBad.data.models.character.Character
+import com.example.breakingBad.data.models.user.UserRegistrationRequest
 import com.example.breakingBad.data.network.NetworkClient
 import com.example.breakingBad.data.storage.DataStore
 import com.example.breakingBad.data.storage.db.entities.SavedCharacterIdEntity
@@ -47,6 +48,12 @@ object Repository {
             }
     }
 
+    suspend fun getRemoteAndSaveProfile() {
+        DataStore.db.getUserProfileDao().insert(
+            NetworkClient.userService.getUser()
+        )
+    }
+
     suspend fun getRemoteCharactersAndStore(
         limit: Int,
         offset: Int
@@ -59,6 +66,15 @@ object Repository {
         return characters
     }
 
+    suspend fun loginAndSetToken(username: String, password: String) {
+        NetworkClient.userService.login(
+            username = username,
+            password = password
+        ).apply {
+            DataStore.authToken = accessToken
+        }
+    }
+
     suspend fun clearProfile() {
         DataStore.db.getUserProfileDao().delete()
     }
@@ -69,5 +85,23 @@ object Repository {
     suspend fun getLocalSavedCharacterIds() =
         DataStore.db.getSavedCharactersDao().getSavedCharacters().map { it.charId }
 
-
+    suspend fun registerAndLogin(
+        name: String,
+        userName: String,
+        password: String
+    ) {
+        NetworkClient.userService.register(
+            UserRegistrationRequest(
+                name = name,
+                userName = userName,
+                password = password
+            )
+        )
+        NetworkClient.userService.login(
+            username = userName,
+            password = password
+        ).accessToken.apply {
+            DataStore.authToken = this
+        }
+    }
 }

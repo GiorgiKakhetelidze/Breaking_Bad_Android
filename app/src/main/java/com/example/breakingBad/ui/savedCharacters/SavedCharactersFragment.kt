@@ -14,7 +14,7 @@ import com.example.breakingBad.base.BaseFragment
 import com.example.breakingBad.base.BaseViewModel
 import com.example.breakingBad.data.models.character.Character
 import com.example.breakingBad.databinding.SavedCharactersScreenBinding
-import com.example.breakingBad.ui.cardDetails.CharacterDetailsFragmentDirections
+import com.example.breakingBad.ui.characterDetails.CharacterDetailsFragmentDirections
 import com.example.breakingBad.ui.home.CardAdapter
 import com.example.breakingBad.ui.login.LoginViewModel
 import com.example.breakingBad.utils.SavedCharacterDecorator

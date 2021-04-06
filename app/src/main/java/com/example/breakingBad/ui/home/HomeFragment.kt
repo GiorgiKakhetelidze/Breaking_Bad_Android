@@ -11,7 +11,7 @@ import com.example.breakingBad.R
 import com.example.breakingBad.base.BaseFragment
 import com.example.breakingBad.data.models.character.Character
 import com.example.breakingBad.databinding.*
-import com.example.breakingBad.ui.cardDetails.CharacterDetailsFragmentDirections
+import com.example.breakingBad.ui.characterDetails.CharacterDetailsFragmentDirections
 import com.example.breakingBad.utils.CharacterDecorator
 import com.example.breakingBad.utils.LoadMoreListener
 import java.lang.RuntimeException

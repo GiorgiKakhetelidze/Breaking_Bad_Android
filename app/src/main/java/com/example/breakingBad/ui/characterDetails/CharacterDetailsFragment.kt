@@ -1,6 +1,5 @@
-package com.example.breakingBad.ui.cardDetails
+package com.example.breakingBad.ui.characterDetails
 
-import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.os.Build
 import android.os.Bundle
@@ -9,26 +8,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.breakingBad.R
 import com.example.breakingBad.base.BaseFragment
 import com.example.breakingBad.data.models.character.Character
 import com.example.breakingBad.data.models.character.Quote
-import com.example.breakingBad.databinding.AppearenceItemBinding
 import com.example.breakingBad.databinding.CharacterDetailScreenBinding
 import com.example.breakingBad.databinding.QuoteItemBinding
 import com.example.breakingBad.ui.home.CardAdapter
 import com.example.breakingBad.ui.login.LoginViewModel
 import com.example.breakingBad.ui.season.SeasonFragmentDirections
-import com.example.breakingBad.utils.SavedCharacterDecorator
 import com.example.breakingBad.utils.observeEvent
 import java.lang.RuntimeException
 
@@ -126,6 +121,7 @@ class CharacterDetailsFragment : BaseFragment() {
         loginViewModel.loginFlowFinished.observeEvent(viewLifecycleOwner) {
             if (it) viewModel.determineCardSavedState()
         }
+
 
         viewModel.quotes.observe(viewLifecycleOwner) {
             showQuotes(it)

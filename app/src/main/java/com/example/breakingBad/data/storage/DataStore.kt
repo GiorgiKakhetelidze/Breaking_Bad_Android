@@ -20,6 +20,10 @@ object DataStore {
 
     val db get() = dataBase ?: throw RuntimeException("not initialized!!")
 
+    init {
+        println("Initializing DataManager")
+    }
+
     fun setSharedPreferences(context: Context, sharedPreferences: SharedPreferences) {
         DataStore.sharedPreferences = sharedPreferences
         dataBase = Room.databaseBuilder(context, CharacterDb::class.java, "charDb").build()

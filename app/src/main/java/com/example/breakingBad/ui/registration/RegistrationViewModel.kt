@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.breakingBad.base.BaseViewModel
 import com.example.breakingBad.data.models.user.UserRegistrationRequest
 import com.example.breakingBad.data.network.NetworkClient
+import com.example.breakingBad.data.repository.Repository
 import com.example.breakingBad.data.storage.DataStore
 import com.example.breakingBad.utils.Event
 import com.example.breakingBad.utils.handleNetworkError
@@ -37,20 +38,15 @@ class RegistrationViewModel : BaseViewModel() {
         }
         _validationError.postValue(error)
         if (error != ValidationError.None) return@launch
+        showLoading()
         try {
             withContext(Dispatchers.IO) {
-                NetworkClient.userService.register(
-                    UserRegistrationRequest(
-                        name = name.toString(),
-                        userName = username.toString(),
-                        password = password.toString()
-                    )
-                )
-                val userToken = NetworkClient.userService.login(
-                    username = username.toString(),
+                Repository.registerAndLogin(
+                    name = name.toString(),
+                    userName = username.toString(),
                     password = password.toString()
                 )
-                DataStore.authToken = userToken.accessToken
+                _registrationComplete.postValue(Event(Unit))
             }
             _registrationComplete.postValue(Event(Unit))
         } catch (e: Exception) {

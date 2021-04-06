@@ -72,8 +72,4 @@ class LoginFragment : BaseFragment(), View.OnClickListener {
         findNavController().navigate(R.id.form_login_to_registration)
     }
 
-    companion object {
-        const val KEY_LOGIN_RESULT = "key_login_result"
-        const val KEY_LOGIN_RESULT_SUCCESS = "key_login_result_success"
-    }
 }

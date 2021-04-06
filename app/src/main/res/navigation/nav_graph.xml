@@ -49,7 +49,7 @@
 
     <fragment
         android:id="@+id/characterDetailsFragment"
-        android:name="com.example.breakingBad.ui.cardDetails.CharacterDetailsFragment"
+        android:name="com.example.breakingBad.ui.characterDetails.CharacterDetailsFragment"
         android:label="CardDetailsFragment">
         <argument
             android:name="character"

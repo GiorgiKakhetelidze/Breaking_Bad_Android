@@ -61,6 +61,7 @@ class ProfileFragment : BaseFragment() {
             loginViewModel.logOut()
             activity?.findNavController(R.id.mainContainer)?.navigate(R.id.login)
         }
+
         loginViewModel.loginFlowFinished.observeEvent(viewLifecycleOwner) { loginSuccess ->
             if (loginSuccess)
                 viewModel.getUserData()

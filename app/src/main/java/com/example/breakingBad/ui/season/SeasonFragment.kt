@@ -8,19 +8,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.breakingBad.R
 import com.example.breakingBad.base.BaseFragment
 import com.example.breakingBad.base.BaseViewModel
-import com.example.breakingBad.data.models.character.Character
-import com.example.breakingBad.data.models.character.Episode
 import com.example.breakingBad.databinding.SeasonScreenBinding
-import com.example.breakingBad.ui.cardDetails.CharacterDetailsViewModel
 import com.example.breakingBad.ui.home.CardAdapter
-import com.example.breakingBad.utils.SavedCharacterDecorator
 import com.example.breakingBad.utils.observeEvent
-import java.lang.RuntimeException
 
 class SeasonFragment : BaseFragment() {
 
