@@ -18,7 +18,7 @@ import com.example.breakingBad.data.models.character.Character
 import com.example.breakingBad.databinding.EpisodeDetailScreenBinding
 import com.example.breakingBad.ui.characterDetails.CharacterDetailsFragmentDirections
 import com.example.breakingBad.ui.home.CardAdapter
-import com.example.breakingBad.utils.SavedCharacterDecorator
+import com.example.breakingBad.utils.SavedAndEpisodeCharacterDecorator
 import java.lang.RuntimeException
 
 class EpisodeDetailsFragment : BaseFragment() {
@@ -58,7 +58,7 @@ class EpisodeDetailsFragment : BaseFragment() {
             recycleView.layoutManager = layoutManager
             recycleView.adapter = adapter
             recycleView.addItemDecoration(
-                SavedCharacterDecorator(
+                SavedAndEpisodeCharacterDecorator(
                     marginStart = resources.getDimensionPixelSize(R.dimen.std_screen_insets),
                     marginEnd = resources.getDimensionPixelSize(R.dimen.std_screen_insets),
                     marginTop = resources.getDimensionPixelSize(R.dimen.std_screen_insets),

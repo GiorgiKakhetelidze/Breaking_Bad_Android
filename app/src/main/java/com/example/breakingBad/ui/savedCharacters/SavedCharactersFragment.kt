@@ -17,7 +17,7 @@ import com.example.breakingBad.databinding.SavedCharactersScreenBinding
 import com.example.breakingBad.ui.characterDetails.CharacterDetailsFragmentDirections
 import com.example.breakingBad.ui.home.CardAdapter
 import com.example.breakingBad.ui.login.LoginViewModel
-import com.example.breakingBad.utils.SavedCharacterDecorator
+import com.example.breakingBad.utils.SavedAndEpisodeCharacterDecorator
 import com.example.breakingBad.utils.observeEvent
 import java.lang.RuntimeException
 
@@ -51,11 +51,11 @@ class SavedCharactersFragment : BaseFragment() {
             recycleView.layoutManager = layoutManager
             recycleView.adapter = adapter
             recycleView.addItemDecoration(
-                SavedCharacterDecorator(
-                    marginStart = resources.getDimensionPixelSize(R.dimen.saved_character_margin_start),
-                    marginEnd = resources.getDimensionPixelSize(R.dimen.saved_character_margin_end),
-                    marginTop = resources.getDimensionPixelSize(R.dimen.saved_character_margin_top),
-                    marginBot = resources.getDimensionPixelSize(R.dimen.saved_character_margin_bot)
+                SavedAndEpisodeCharacterDecorator(
+                    marginStart = resources.getDimensionPixelSize(R.dimen.std_screen_insets),
+                    marginEnd = resources.getDimensionPixelSize(R.dimen.std_screen_insets),
+                    marginTop = resources.getDimensionPixelSize(R.dimen.std_screen_insets),
+                    marginBot = resources.getDimensionPixelSize(R.dimen.screen_inset_bottom)
                 )
             )
             swipeToRefresh.setOnRefreshListener {

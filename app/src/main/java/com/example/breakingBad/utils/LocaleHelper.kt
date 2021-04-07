@@ -61,18 +61,6 @@ fun getSplitName(name: String): String {
     }
 }
 
-fun applyOverrideConfigurationLocale(
-    base: Context,
-    overrideConfiguration: Configuration?
-): Configuration? {
-    if (overrideConfiguration != null && Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-        val uiMode = overrideConfiguration.uiMode
-        overrideConfiguration.setTo(base.resources.configuration)
-        overrideConfiguration.uiMode = uiMode
-    }
-    return overrideConfiguration
-}
-
 fun updateLocale(context: Context, language: String): Context {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
         updateResources(context, language)

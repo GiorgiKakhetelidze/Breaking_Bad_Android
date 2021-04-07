@@ -5,7 +5,7 @@ import android.view.View
 import androidx.annotation.Dimension
 import androidx.recyclerview.widget.RecyclerView
 
-class SavedCharacterDecorator(
+class SavedAndEpisodeCharacterDecorator(
     @Dimension
     private val marginStart: Int,
     @Dimension

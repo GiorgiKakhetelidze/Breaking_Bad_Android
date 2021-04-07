@@ -27,6 +27,7 @@
         android:textAppearance="@style/Text_Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/userNameTextView"
         app:layout_constraintTop_toBottomOf="@+id/profilePicImgView"
         tools:text="Name" />
 

@@ -33,14 +33,12 @@
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/userNameInput"
         style="@style/Edit_Text"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="220dp"
         android:hint="@string/username_here"
         app:layout_constraintBottom_toTopOf="@+id/passwordInput"
         app:layout_constraintEnd_toStartOf="@+id/gdEnd"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/gdStart"
         app:layout_constraintTop_toTopOf="@+id/gdTop"
-        app:layout_constraintVertical_bias="0.35"
         tools:text="@string/username_here" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -59,9 +57,9 @@
         android:hint="@string/password_here"
         android:inputType="textPassword"
         app:layout_constraintEnd_toStartOf="@+id/gdEnd"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/gdStart"
         app:layout_constraintTop_toBottomOf="@+id/userNameInput"
+        app:layout_constraintBottom_toTopOf="@id/loginButton"
         tools:text="@string/password_here" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -71,6 +69,7 @@
         android:layout_height="45dp"
         android:layout_marginTop="24dp"
         android:text="@string/button_text"
+        app:layout_constraintBottom_toTopOf="@+id/gdBot"
         app:layout_constraintEnd_toStartOf="@+id/gdEnd"
         app:layout_constraintStart_toStartOf="@id/gdStart"
         app:layout_constraintTop_toBottomOf="@+id/passwordInput" />
@@ -79,12 +78,12 @@
         android:id="@+id/haveAccView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="50dp"
         android:text="@string/login_screen_dont_t_have_an_account"
         android:textAppearance="@style/login_screen_have_acc"
         app:layout_constraintEnd_toStartOf="@+id/gdEnd"
         app:layout_constraintStart_toStartOf="@+id/gdStart"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+        app:layout_constraintTop_toBottomOf="@+id/gdBot" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/registerBtnLogin"
@@ -104,6 +103,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gdBot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
