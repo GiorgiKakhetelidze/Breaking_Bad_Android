@@ -28,7 +28,7 @@ class SavedCharactersFragment : BaseFragment() {
     private var binding: SavedCharactersScreenBinding? = null
     private val loginViewModel by activityViewModels<LoginViewModel>()
 
-    private var adapter = CardAdapter("SavedCharactersFragment") {
+    private var adapter = CardAdapter<Character>("SavedCharactersFragment") {
         if (it is Character) {
             val action = CharacterDetailsFragmentDirections.actionGlobalCharacterDetailsFragment(it)
             activity?.findNavController(R.id.mainContainer)?.navigate(action)
@@ -69,7 +69,7 @@ class SavedCharactersFragment : BaseFragment() {
         }
 
         viewModel.characters.observe(viewLifecycleOwner) {
-            adapter.characterList = it
+            adapter.itemList = it
             binding?.swipeToRefresh?.isRefreshing = false
         }
 

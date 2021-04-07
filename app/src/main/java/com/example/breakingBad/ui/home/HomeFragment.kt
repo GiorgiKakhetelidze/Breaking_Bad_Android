@@ -23,7 +23,7 @@ class HomeFragment : BaseFragment() {
 
     override fun getViewModelInstance() = viewModel
 
-    private val adapter = CardAdapter("HomeFragment") {
+    private val adapter = CardAdapter<Character>("HomeFragment") {
         if (it is Character) {
             val action = CharacterDetailsFragmentDirections.actionGlobalCharacterDetailsFragment(it)
             activity?.findNavController(R.id.mainContainer)?.navigate(action)
@@ -65,7 +65,7 @@ class HomeFragment : BaseFragment() {
             }
 
             viewModel.characters.observe(viewLifecycleOwner) {
-                adapter.characterList = it
+                adapter.itemList = it
             }
 
             viewModel.loadingMore.observe(viewLifecycleOwner) {

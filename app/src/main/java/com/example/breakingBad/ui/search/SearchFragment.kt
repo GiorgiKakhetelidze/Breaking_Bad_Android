@@ -21,7 +21,7 @@ class SearchFragment : Fragment() {
 
     private val viewModel: SearchViewModel by viewModels()
     private var binding: SearchScreenBinding? = null
-    private val adapter = CardAdapter("SearchFragment") {
+    private val adapter = CardAdapter<Character>("SearchFragment") {
         if (it is Character) {
             val action = CharacterDetailsFragmentDirections.actionGlobalCharacterDetailsFragment(it)
             activity?.findNavController(R.id.mainContainer)?.navigate(action)
@@ -53,7 +53,7 @@ class SearchFragment : Fragment() {
             )
         )
         viewModel.characters.observe(viewLifecycleOwner) {
-            adapter.characterList = it
+            adapter.itemList = it
         }
 
         binding?.searchInput?.doOnTextChanged { text, _, _, _ ->

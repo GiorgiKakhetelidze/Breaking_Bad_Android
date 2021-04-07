@@ -15,18 +15,12 @@ import com.example.breakingBad.databinding.*
 
 import java.lang.RuntimeException
 
-class CardAdapter(
-    val creatorClassName: String,
+class CardAdapter<T>(
+    private val creatorClassName: String,
     private val onCharacterClick: (character: Any) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var characterList: List<Character> = emptyList()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
-
-    var episodeList: List<Episode> = emptyList()
+    var itemList: List<T> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -37,6 +31,9 @@ class CardAdapter(
             field = value
             notifyItemChanged(itemCount - 1)
         }
+
+    private var isAppearanceView = false
+
 
     //Sets on Specific View in ViewHolder Classes and Calls after click on View
     private val onClickListener = View.OnClickListener { v ->
@@ -113,68 +110,81 @@ class CardAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is CharacterViewHolder -> {
-                val item = characterList[position]
-                holder.binding.charNameTxtView.text = item.name
-                holder.binding.root.tag = item
-                Glide.with(holder.itemView).load(item.img).into(holder.binding.charItemView)
+                val item = itemList[position]
+                if (item is Character) {
+                    holder.binding.charNameTxtView.text = item.name
+                    holder.binding.root.tag = item
+                    Glide.with(holder.itemView).load(item.img).into(holder.binding.charItemView)
+                }
             }
             is SavedCharacterViewHolder -> {
-                val item = characterList[position]
-                holder.binding.savedCharacterNameTextView.text = item.name
-                holder.binding.savedCharacterNickNameTextView.text = item.nickname
-                holder.binding.savedCharacterPortrayedTextView.text = "by\n" + item.portrayed
-                holder.binding.savedCharItemView.tag = item
-                Glide.with(holder.itemView).load(item.img).into(holder.binding.savedCharItemView)
+                val item = itemList[position]
+                if (item is Character) {
+                    holder.binding.savedCharacterNameTextView.text = item.name
+                    holder.binding.savedCharacterNickNameTextView.text = item.nickname
+                    holder.binding.savedCharacterPortrayedTextView.text = "by\n" + item.portrayed
+                    holder.binding.savedCharItemView.tag = item
+                    Glide.with(holder.itemView).load(item.img)
+                        .into(holder.binding.savedCharItemView)
+                }
             }
             is SeasonAppearanceHolder -> {
-                val item = characterList.first()
-                val betterCallSaulAppearance = item.betterCallSaulAppearance
-                val breakingBadAppearance = item.appearance
-                val bothSeries = betterCallSaulAppearance + breakingBadAppearance
+                isAppearanceView = true
+                val item = itemList.first()
+                if (item is Character) {
+                    val betterCallSaulAppearance = item.betterCallSaulAppearance
+                    val breakingBadAppearance = item.appearance
+                    val bothSeries = betterCallSaulAppearance + breakingBadAppearance
 
-                if (betterCallSaulAppearance.isNotEmpty() && position < betterCallSaulAppearance.size) {
-                    holder.binding.seasonTxtView.background = getDrawable(
-                        holder.itemView.resources,
-                        R.drawable.season_bcs_logo,
-                        null
-                    )
-                    val isBcsLogo = true
-                    val seasonNum = bothSeries[position]
-                    holder.binding.seasonTxtView.text =
-                        "\nSEASON\n$seasonNum"
-                    holder.binding.root.tag = "$isBcsLogo|$seasonNum"
-                } else if (breakingBadAppearance.isNotEmpty()) {
-                    holder.binding.seasonTxtView.background = getDrawable(
-                        holder.itemView.resources,
-                        R.drawable.season_bb_logo,
-                        null
-                    )
-                    val isBcsLogo = false
-                    val seasonNum = bothSeries[position]
-                    holder.binding.seasonTxtView.text =
-                        "\nSEASON\n$seasonNum"
-                    holder.binding.root.tag = "$isBcsLogo|$seasonNum"
+                    if (betterCallSaulAppearance.isNotEmpty() && position < betterCallSaulAppearance.size) {
+                        holder.binding.seasonTxtView.background = getDrawable(
+                            holder.itemView.resources,
+                            R.drawable.season_bcs_logo,
+                            null
+                        )
+                        val isBcsLogo = true
+                        val seasonNum = bothSeries[position]
+                        holder.binding.seasonTxtView.text =
+                            "\nSEASON\n$seasonNum"
+                        holder.binding.root.tag = "$isBcsLogo|$seasonNum"
+                    } else if (breakingBadAppearance.isNotEmpty()) {
+                        holder.binding.seasonTxtView.background = getDrawable(
+                            holder.itemView.resources,
+                            R.drawable.season_bb_logo,
+                            null
+                        )
+                        val isBcsLogo = false
+                        val seasonNum = bothSeries[position]
+                        holder.binding.seasonTxtView.text =
+                            "\nSEASON\n$seasonNum"
+                        holder.binding.root.tag = "$isBcsLogo|$seasonNum"
+                    }
                 }
             }
             is SeasonViewHolder -> {
-                val item = episodeList[position]
-                holder.binding.episodeNumTextView.text = "Episodes" + item.season.toString()
-                holder.binding.episodeNameTextView.text = item.title
-                holder.binding.root.tag = item
-                if (item.title == "Pilot")
-                    Glide.with(holder.itemView).load(R.drawable.season_pilot)
-                        .into(holder.binding.episodeItemView)
-                else
-                    Glide.with(holder.itemView).load(R.drawable.season_img_std)
-                        .into(holder.binding.episodeItemView)
+                val item = itemList[position]
+                if (item is Episode) {
+                    holder.binding.episodeNumTextView.text = "Episodes" + item.season.toString()
+                    holder.binding.episodeNameTextView.text = item.title
+                    holder.binding.root.tag = item
+                    if (item.title == "Pilot")
+                        Glide.with(holder.itemView).load(R.drawable.season_pilot)
+                            .into(holder.binding.episodeItemView)
+                    else
+                        Glide.with(holder.itemView).load(R.drawable.season_img_std)
+                            .into(holder.binding.episodeItemView)
+                }
             }
-            is EpisodeCharacterViewHolder ->{
-                val item = characterList[position]
-                holder.binding.savedCharacterNameTextView.text = item.name
-                holder.binding.savedCharacterNickNameTextView.text = item.nickname
-                holder.binding.savedCharacterPortrayedTextView.text = "by\n" + item.portrayed
-                holder.binding.root.tag = item
-                Glide.with(holder.itemView).load(item.img).into(holder.binding.savedCharItemView)
+            is EpisodeCharacterViewHolder -> {
+                val item = itemList[position]
+                if (item is Character) {
+                    holder.binding.savedCharacterNameTextView.text = item.name
+                    holder.binding.savedCharacterNickNameTextView.text = item.nickname
+                    holder.binding.savedCharacterPortrayedTextView.text = "by\n" + item.portrayed
+                    holder.binding.root.tag = item
+                    Glide.with(holder.itemView).load(item.img)
+                        .into(holder.binding.savedCharItemView)
+                }
             }
             is LoadingViewHolder -> {
                 holder.binding.loaderBar.visibility =
@@ -184,24 +194,23 @@ class CardAdapter(
     }
 
     override fun getItemCount(): Int {
-        return when {
-            episodeList.isNotEmpty() -> episodeList.size + 1
-            characterList.size == 1 && characterList.first().appearance.isNotEmpty()
-                    && characterList.first().betterCallSaulAppearance.isEmpty() ->
-                characterList.first().appearance.size + 1
-            characterList.size == 1 && characterList.first().betterCallSaulAppearance.isNotEmpty()
-                    && characterList.first().appearance.isEmpty() ->
-                characterList.first().betterCallSaulAppearance.size + 1
-            characterList.size == 1 && characterList.first().betterCallSaulAppearance.isNotEmpty()
-                    && characterList.first().appearance.isNotEmpty() ->
-                (characterList.first().betterCallSaulAppearance + characterList.first().appearance).size + 1
-            else -> characterList.size + 1
+        if (itemList.isNotEmpty()) {
+            val item = itemList.first()
+            if (item is Character) {
+                if (isAppearanceView && itemList.size == 1 && item.appearance.isNotEmpty() && item.betterCallSaulAppearance.isEmpty())
+                    return item.appearance.size + 1
+                if (isAppearanceView && itemList.size == 1 && item.betterCallSaulAppearance.isNotEmpty() && item.appearance.isEmpty())
+                    return item.betterCallSaulAppearance.size + 1
+                if (isAppearanceView && itemList.size == 1 && item.betterCallSaulAppearance.isNotEmpty() && item.appearance.isNotEmpty())
+                    return (item.betterCallSaulAppearance + item.appearance).size + 1
+            }
         }
+        return itemList.size + 1
     }
 
 
     //Spans
-    class LoaderSpanSizeLookup(private val adapter: CardAdapter) :
+    class LoaderSpanSizeLookup(private val adapter: CardAdapter<Character>) :
         GridLayoutManager.SpanSizeLookup() {
         override fun getSpanSize(position: Int): Int {
             return if (adapter.creatorClassName == HOME || adapter.creatorClassName == SEARCH)

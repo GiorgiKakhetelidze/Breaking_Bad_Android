@@ -30,7 +30,7 @@ class SeasonFragment : BaseFragment() {
 
     override fun getViewModelInstance(): BaseViewModel = viewModel
 
-    private var adapter = CardAdapter("SeasonFragment") {
+    private var adapter = CardAdapter<Episode>("SeasonFragment") {
         if(it is Episode){
             val action = EpisodeDetailsFragmentDirections.actionGlobalEpisodeFragment(it)
             activity?.findNavController(R.id.mainContainer)?.navigate(action)
@@ -71,7 +71,7 @@ class SeasonFragment : BaseFragment() {
         }
 
         viewModel.episodes.observe(viewLifecycleOwner) {
-            adapter.episodeList = it
+            adapter.itemList = it
             binding?.swipeToRefresh?.isRefreshing = false
         }
     }

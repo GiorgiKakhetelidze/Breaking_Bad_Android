@@ -44,13 +44,12 @@ class HomeViewModel : BaseViewModel() {
 
     private fun loadCharacters() {
         viewModelScope.launch(Dispatchers.IO) {
-            _loadingMore.postValue(true)
             try {
+                _loadingMore.postValue(true)
                 val data = Repository.getRemoteCharactersAndStore(limit = LIMIT, offset = offset)
                 offset += data.size
                 _characters.postValue((_characters.value ?: emptyList()) + data)
                 noMoreCharacters = data.size != LIMIT
-
             } catch (e: Exception) {
                 showDialog(DialogData(title = R.string.common_error, message = e.message ?: ""))
             } finally {

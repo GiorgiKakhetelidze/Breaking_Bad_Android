@@ -43,7 +43,7 @@ class CharacterDetailsFragment : BaseFragment() {
         )
     }
 
-    private val adapter = CardAdapter("CharacterDetailsFragment") {
+    private val adapter = CardAdapter<Character>("CharacterDetailsFragment") {
         if (it is String) {
             val action = SeasonFragmentDirections.actionGlobalSeasonFragment(it)
             activity?.findNavController(R.id.mainContainer)?.navigate(action)
@@ -68,7 +68,7 @@ class CharacterDetailsFragment : BaseFragment() {
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding?.apply {
             recycleView.layoutManager = layoutManager
-            adapter.characterList = listOf(characterDetailArg.character)
+            adapter.itemList = listOf(characterDetailArg.character)
             recycleView.adapter = adapter
             backBtn.setOnClickListener {
                 findNavController().popBackStack()

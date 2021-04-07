@@ -35,7 +35,7 @@ class EpisodeDetailsFragment : BaseFragment() {
 
     private var binding: EpisodeDetailScreenBinding? = null
 
-    private var adapter = CardAdapter("EpisodeDetailsFragment") {
+    private var adapter = CardAdapter<Character>("EpisodeDetailsFragment") {
         if (it is Character) {
             val action = CharacterDetailsFragmentDirections.actionGlobalCharacterDetailsFragment(it)
             activity?.findNavController(R.id.mainContainer)?.navigate(action)
@@ -74,7 +74,7 @@ class EpisodeDetailsFragment : BaseFragment() {
 
         viewModel.characters.observe(viewLifecycleOwner) {
             showEpisodeData()
-            adapter.characterList = it
+            adapter.itemList = it
         }
     }
 
