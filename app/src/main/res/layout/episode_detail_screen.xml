@@ -5,6 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black">
+    <ImageView
+        android:id="@+id/episodeItemImgView"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:contentDescription="@string/img_description"
+        android:scaleType="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/backBtn"
@@ -20,53 +29,49 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/episodeItemImgView"
-        android:layout_width="match_parent"
-        android:layout_height="280dp"
-        android:contentDescription="@string/img_description"
-        android:scaleType="center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <ImageView
         android:id="@+id/episodeItemLogoView"
-        android:layout_width="58dp"
+        android:layout_width="70dp"
         android:layout_height="35dp"
-        android:contentDescription="@string/img_description"
         android:layout_marginTop="@dimen/std_plus_screen_insets"
         android:layout_marginEnd="15dp"
+        android:contentDescription="@string/img_description"
         android:scaleType="center"
-        app:layout_constraintTop_toBottomOf="@id/episodeItemImgView"
-        app:layout_constraintEnd_toEndOf="@id/episodeItemImgView"/>
+        app:layout_constraintEnd_toEndOf="@id/episodeItemImgView"
+        app:layout_constraintTop_toBottomOf="@id/episodeItemImgView" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/episodeTitleTxtView"
         style="@style/Text_Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/std_vertical_margin_half"
         android:layout_marginStart="@dimen/std_screen_insets"
-        app:layout_constraintTop_toBottomOf="@id/episodeItemImgView"
+        android:layout_marginTop="@dimen/std_vertical_margin_half"
+        android:ellipsize="end"
+        android:maxLines="1"
         app:layout_constraintStart_toStartOf="@id/episodeItemImgView"
+        app:layout_constraintTop_toBottomOf="@id/episodeItemImgView"
         tools:text="Episode" />
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeToRefresh"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/episodeSeasonTxtView"
+        style="@style/login_screen_have_acc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:layout_marginStart="@dimen/std_screen_insets"
+        app:layout_constraintStart_toStartOf="@id/episodeItemImgView"
+        app:layout_constraintTop_toBottomOf="@id/episodeTitleTxtView"
+        tools:text="Season" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/std_vertical_margin_half"
-        app:layout_constraintTop_toBottomOf="@+id/episodeTitleTxtView">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycleView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/episodeTitleTxtView" />
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        android:layout_marginTop="@dimen/std_screen_insets"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/episodeTitleTxtView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

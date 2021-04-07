@@ -11,6 +11,7 @@ import com.example.breakingBad.utils.handleNetworkError
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import com.example.breakingBad.utils.getSplitName
 
 class CharacterDetailsViewModel(private val characters: Character) :
     BaseViewModel() {
@@ -86,20 +87,12 @@ class CharacterDetailsViewModel(private val characters: Character) :
     }
 
     private fun getCharacterQuotes() {
-        val nameSurname = characters.name.split(" ")
-
-        val name = when (nameSurname.size) {
-            1 -> nameSurname[0]
-            3 -> nameSurname[0] + "+" + nameSurname[1] + "+" + nameSurname[2]
-            4 -> nameSurname[0] + "+" + nameSurname[1] + "+" + nameSurname[2] + "+" + nameSurname[3]
-            else -> nameSurname[0] + "+" + nameSurname[1]
-        }
-
         viewModelScope.launch(Dispatchers.IO)
         {
             try {
                 showLoading()
-                val characterQuotes = NetworkClient.characterService.getQuotesByAuthor(name)
+                val characterQuotes =
+                    NetworkClient.characterService.getQuotesByAuthor(getSplitName(characters.name))
                 _quotes.postValue(characterQuotes)
             } catch (e: Exception) {
                 handleNetworkError(e)

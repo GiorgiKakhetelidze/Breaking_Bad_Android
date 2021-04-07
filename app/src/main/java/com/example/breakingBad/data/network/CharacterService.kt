@@ -20,7 +20,12 @@ interface CharacterService {
     ): List<Character>
 
     @GET("characters")
-    suspend fun getCharacterByName(@Query("name") name: String): MutableList<Character>
+    suspend fun getCharacterByName(
+        @Query(
+            "name",
+            encoded = true
+        ) name: String
+    ): List<Character>
 
     @GET("characters/{id}")
     suspend fun getCharacterBydId(
@@ -32,11 +37,11 @@ interface CharacterService {
 
     @GET("quote")
     suspend fun getQuotesByAuthor(
-        @Query("author",encoded = true) author: String
+        @Query("author", encoded = true) author: String
     ): MutableList<Quote>
 
     @GET("episodes")
     suspend fun getEpisodesBySeries(
-        @Query("series",encoded = true) episode: String
+        @Query("series", encoded = true) episode: String
     ): MutableList<Episode>
 }

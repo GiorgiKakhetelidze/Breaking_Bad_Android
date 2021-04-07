@@ -1,22 +1,27 @@
 package com.example.breakingBad.ui.episodeDetails
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.breakingBad.R
 import com.example.breakingBad.base.BaseFragment
 import com.example.breakingBad.base.BaseViewModel
+import com.example.breakingBad.data.models.character.Character
 import com.example.breakingBad.databinding.EpisodeDetailScreenBinding
+import com.example.breakingBad.ui.characterDetails.CharacterDetailsFragmentDirections
 import com.example.breakingBad.ui.home.CardAdapter
-import com.example.breakingBad.ui.season.SeasonViewModel
 import com.example.breakingBad.utils.SavedCharacterDecorator
+import java.lang.RuntimeException
 
 class EpisodeDetailsFragment : BaseFragment() {
-
 
     override fun getViewModelInstance(): BaseViewModel = viewModel
 
@@ -30,11 +35,11 @@ class EpisodeDetailsFragment : BaseFragment() {
 
     private var binding: EpisodeDetailScreenBinding? = null
 
-    private var adapter = CardAdapter("SavedCharactersFragment") {
-/*        if (it is Character) {
+    private var adapter = CardAdapter("EpisodeDetailsFragment") {
+        if (it is Character) {
             val action = CharacterDetailsFragmentDirections.actionGlobalCharacterDetailsFragment(it)
             activity?.findNavController(R.id.mainContainer)?.navigate(action)
-        } else throw RuntimeException("Unknown argument type for DetailsFragment")*/
+        } else throw RuntimeException("Unknown argument type for DetailsFragment")
     }
 
     override fun onCreateView(
@@ -54,17 +59,46 @@ class EpisodeDetailsFragment : BaseFragment() {
             recycleView.adapter = adapter
             recycleView.addItemDecoration(
                 SavedCharacterDecorator(
-                    marginStart = resources.getDimensionPixelSize(R.dimen.saved_character_margin_start),
-                    marginEnd = resources.getDimensionPixelSize(R.dimen.saved_character_margin_end),
-                    marginTop = resources.getDimensionPixelSize(R.dimen.saved_character_margin_top),
-                    marginBot = resources.getDimensionPixelSize(R.dimen.saved_character_margin_bot)
+                    marginStart = resources.getDimensionPixelSize(R.dimen.std_screen_insets),
+                    marginEnd = resources.getDimensionPixelSize(R.dimen.std_screen_insets),
+                    marginTop = resources.getDimensionPixelSize(R.dimen.std_screen_insets),
+                    marginBot = resources.getDimensionPixelSize(R.dimen.screen_inset_bottom)
                 )
             )
-            swipeToRefresh.setOnRefreshListener {
-                //viewModel.onRefresh()
-                swipeToRefresh.isRefreshing = false
+
+            backBtn.setOnClickListener {
+                findNavController().popBackStack()
             }
+
         }
+
+        viewModel.characters.observe(viewLifecycleOwner) {
+            showEpisodeData()
+            adapter.characterList = it
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun showEpisodeData() = binding?.apply {
+        val title = episodeItem.episode.title
+        val season = "Season "
+        episodeSeasonTxtView.text = season + episodeItem.episode.season.toString()
+        episodeTitleTxtView.text = title
+        if (title == PILOT_SERIES_LOGO)
+            Glide.with(root).load(R.drawable.season_pilot).into(episodeItemImgView)
+        else
+            Glide.with(root).load(R.drawable.season_img_std).into(episodeItemImgView)
+
+        val series = episodeItem.episode.series
+        if (series == BREAKING_BAD)
+            Glide.with(root).load(R.drawable.breaking_bad_logo).into(episodeItemLogoView)
+        else
+            Glide.with(root).load(R.drawable.better_call_saul_logo).into(episodeItemLogoView)
+    }
+
+    companion object {
+        const val PILOT_SERIES_LOGO = "Pilot"
+        const val BREAKING_BAD = "Breaking Bad"
     }
 
 }

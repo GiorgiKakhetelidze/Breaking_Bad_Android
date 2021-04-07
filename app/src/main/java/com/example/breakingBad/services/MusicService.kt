@@ -15,7 +15,7 @@ class MusicService() : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        player = MediaPlayer.create(this, R.raw.bb_soundtrack)
+        player = MediaPlayer.create(this, R.raw.intro)
         player.isLooping = true
         player.start()
         return super.onStartCommand(intent, flags, startId)

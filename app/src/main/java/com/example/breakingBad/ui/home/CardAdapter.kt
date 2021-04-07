@@ -1,12 +1,10 @@
 package com.example.breakingBad.ui.home
 
 import android.annotation.SuppressLint
-import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat.getDrawable
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -62,16 +60,14 @@ class CardAdapter(
        which type viewHolder to be attached
       This is being called from onBindViewHolder() method*/
     override fun getItemViewType(position: Int): Int {
-        return if (creatorClassName == HOME || creatorClassName == SEARCH)
-            if (itemCount - 1 == position) VIEW_TYPE_LOADER else VIEW_TYPE_CHARACTER
-        else if (creatorClassName == SAVED)
-            if (itemCount - 1 == position) VIEW_TYPE_LOADER else VIEW_TYPE_SAVED
-        else if (creatorClassName == SEASON)
-            if (itemCount - 1 == position) VIEW_TYPE_LOADER else VIEW_TYPE_SEASON
-        else if (creatorClassName == APPEARANCE)
-            if (itemCount - 1 == position) VIEW_TYPE_LOADER else VIEW_TYPE_APPEARANCE
-        else
-            throw RuntimeException("Unknown ViewType")
+        return when (creatorClassName) {
+            HOME, SEARCH -> if (itemCount - 1 == position) VIEW_TYPE_LOADER else VIEW_TYPE_CHARACTER
+            SAVED -> if (itemCount - 1 == position) VIEW_TYPE_LOADER else VIEW_TYPE_SAVED
+            SEASON -> if (itemCount - 1 == position) VIEW_TYPE_LOADER else VIEW_TYPE_SEASON
+            APPEARANCE -> if (itemCount - 1 == position) VIEW_TYPE_LOADER else VIEW_TYPE_APPEARANCE
+            EPISODE -> if (itemCount - 1 == position) VIEW_TYPE_LOADER else VIEW_TYPE_EPISODE
+            else -> throw RuntimeException("Unknown ViewType")
+        }
     }
 
     // Invoked by layout manager to create new views
@@ -96,6 +92,12 @@ class CardAdapter(
             VIEW_TYPE_APPEARANCE -> {
                 SeasonAppearanceHolder(
                     binding = AppearenceItemBinding.inflate(LayoutInflater.from(parent.context)),
+                    onClickListener = onClickListener
+                )
+            }
+            VIEW_TYPE_EPISODE -> {
+                EpisodeCharacterViewHolder(
+                    binding = EpisodeDetailItemBinding.inflate(LayoutInflater.from(parent.context)),
                     onClickListener = onClickListener
                 )
             }
@@ -166,6 +168,14 @@ class CardAdapter(
                     Glide.with(holder.itemView).load(R.drawable.season_img_std)
                         .into(holder.binding.episodeItemView)
             }
+            is EpisodeCharacterViewHolder ->{
+                val item = characterList[position]
+                holder.binding.savedCharacterNameTextView.text = item.name
+                holder.binding.savedCharacterNickNameTextView.text = item.nickname
+                holder.binding.savedCharacterPortrayedTextView.text = "by\n" + item.portrayed
+                holder.binding.root.tag = item
+                Glide.with(holder.itemView).load(item.img).into(holder.binding.savedCharItemView)
+            }
             is LoadingViewHolder -> {
                 holder.binding.loaderBar.visibility =
                     if (loadingMore) View.VISIBLE else View.GONE
@@ -174,16 +184,19 @@ class CardAdapter(
     }
 
     override fun getItemCount(): Int {
-        return if (episodeList.isNotEmpty())
-            episodeList.size + 1
-        else if (characterList.size == 1 && characterList.first().appearance.isNotEmpty() && characterList.first().betterCallSaulAppearance.isEmpty())
-            characterList.first().appearance.size + 1
-        else if (characterList.size == 1 && characterList.first().betterCallSaulAppearance.isNotEmpty() && characterList.first().appearance.isEmpty())
-            characterList.first().betterCallSaulAppearance.size + 1
-        else if (characterList.size == 1 && characterList.first().betterCallSaulAppearance.isNotEmpty() && characterList.first().appearance.isNotEmpty())
-            (characterList.first().betterCallSaulAppearance + characterList.first().appearance).size + 1
-        else
-            characterList.size + 1
+        return when {
+            episodeList.isNotEmpty() -> episodeList.size + 1
+            characterList.size == 1 && characterList.first().appearance.isNotEmpty()
+                    && characterList.first().betterCallSaulAppearance.isEmpty() ->
+                characterList.first().appearance.size + 1
+            characterList.size == 1 && characterList.first().betterCallSaulAppearance.isNotEmpty()
+                    && characterList.first().appearance.isEmpty() ->
+                characterList.first().betterCallSaulAppearance.size + 1
+            characterList.size == 1 && characterList.first().betterCallSaulAppearance.isNotEmpty()
+                    && characterList.first().appearance.isNotEmpty() ->
+                (characterList.first().betterCallSaulAppearance + characterList.first().appearance).size + 1
+            else -> characterList.size + 1
+        }
     }
 
 
@@ -241,6 +254,15 @@ class CardAdapter(
         }
     }
 
+    class EpisodeCharacterViewHolder(
+        val binding: EpisodeDetailItemBinding,
+        onClickListener: View.OnClickListener
+    ) : RecyclerView.ViewHolder(binding.root) {
+        init {
+            binding.root.setOnClickListener(onClickListener)
+        }
+    }
+
     class LoadingViewHolder(val binding: LoadingItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -250,10 +272,12 @@ class CardAdapter(
         const val VIEW_TYPE_SAVED = 3
         const val VIEW_TYPE_SEASON = 4
         const val VIEW_TYPE_APPEARANCE = 5
+        const val VIEW_TYPE_EPISODE = 6
         const val HOME = "HomeFragment"
         const val SEARCH = "SearchFragment"
         const val SAVED = "SavedCharactersFragment"
         const val SEASON = "SeasonFragment"
         const val APPEARANCE = "CharacterDetailsFragment"
+        const val EPISODE = "EpisodeDetailsFragment"
     }
 }

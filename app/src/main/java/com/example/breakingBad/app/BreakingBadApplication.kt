@@ -18,6 +18,6 @@ class BreakingBadApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         DataStore.setSharedPreferences(this, getSharedPreferences("_sp_", Context.MODE_PRIVATE))
-        //startService(Intent(this, MusicService::class.java))
     }
+
 }

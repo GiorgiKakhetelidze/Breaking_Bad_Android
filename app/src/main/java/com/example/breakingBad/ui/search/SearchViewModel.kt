@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.breakingBad.data.models.character.Character
 import com.example.breakingBad.data.network.NetworkClient
+import com.example.breakingBad.data.repository.Repository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -21,7 +22,7 @@ class SearchViewModel : ViewModel() {
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val characters = NetworkClient.characterService.getCharacterByName("$name")
+                val characters = Repository.getRemoteCharacterByName(name = name.toString())
                 _characters.postValue(characters)
             } catch (e: Exception) {
                 e.printStackTrace()

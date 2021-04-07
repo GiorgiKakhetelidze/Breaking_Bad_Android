@@ -9,11 +9,15 @@ import kotlinx.coroutines.flow.map
 
 object Repository {
 
-    suspend fun checkSavedIdsValidity(): Boolean =
+    fun checkSavedIdsValidity(): Boolean =
         System.currentTimeMillis() - DataStore.lastTimeSavedCardsFetched < 60 * 60 * 1000
 
-    suspend fun invalidateSavedIds() {
+    fun invalidateSavedIds() {
         DataStore.lastTimeSavedCardsFetched = 0
+    }
+
+    suspend fun getRemoteCharacterByName(name : String) : List<Character>{
+       return NetworkClient.characterService.getCharacterByName(name)
     }
 
     suspend fun getLocalCharacterById(id: Int): Character? {
@@ -75,14 +79,14 @@ object Repository {
         }
     }
 
-    suspend fun clearProfile() {
+    fun clearProfile() {
         DataStore.db.getUserProfileDao().delete()
     }
 
-    suspend fun clearSavedCards() =
+    fun clearSavedCards() =
         DataStore.db.getSavedCharactersDao().deleteAll()
 
-    suspend fun getLocalSavedCharacterIds() =
+    fun getLocalSavedCharacterIds() =
         DataStore.db.getSavedCharactersDao().getSavedCharacters().map { it.charId }
 
     suspend fun registerAndLogin(

@@ -14,5 +14,11 @@ class MainActivity : LanguageAwareActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        startService(Intent(this, MusicService::class.java))
+    }
+
+    override fun onDestroy() {
+        stopService(Intent(this, MusicService::class.java))
+        super.onDestroy()
     }
 }
