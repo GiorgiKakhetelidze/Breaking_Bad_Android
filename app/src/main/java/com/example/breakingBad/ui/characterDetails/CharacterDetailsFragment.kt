@@ -21,7 +21,7 @@ import com.example.breakingBad.data.models.character.Character
 import com.example.breakingBad.data.models.character.Quote
 import com.example.breakingBad.databinding.CharacterDetailScreenBinding
 import com.example.breakingBad.databinding.QuoteItemBinding
-import com.example.breakingBad.ui.home.CardAdapter
+import com.example.breakingBad.ui.home.HomeAdapter
 import com.example.breakingBad.ui.login.LoginViewModel
 import com.example.breakingBad.ui.season.SeasonFragmentDirections
 import com.example.breakingBad.utils.observeEvent
@@ -43,13 +43,10 @@ class CharacterDetailsFragment : BaseFragment() {
         )
     }
 
-    private val adapter = CardAdapter<Character>("CharacterDetailsFragment") {
-        if (it is String) {
-            val action = SeasonFragmentDirections.actionGlobalSeasonFragment(it)
-            activity?.findNavController(R.id.mainContainer)?.navigate(action)
-        } else throw RuntimeException("Unknown argument type for SeasonFragment")
+    private val adapter = DetailsAppearanceAdapter {
+        val action = SeasonFragmentDirections.actionGlobalSeasonFragment(it)
+        activity?.findNavController(R.id.mainContainer)?.navigate(action)
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -68,7 +65,7 @@ class CharacterDetailsFragment : BaseFragment() {
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding?.apply {
             recycleView.layoutManager = layoutManager
-            adapter.itemList = listOf(characterDetailArg.character)
+            adapter.characterList = listOf(characterDetailArg.character)
             recycleView.adapter = adapter
             backBtn.setOnClickListener {
                 findNavController().popBackStack()

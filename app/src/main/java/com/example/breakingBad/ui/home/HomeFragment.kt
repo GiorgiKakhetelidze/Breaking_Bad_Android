@@ -9,12 +9,10 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.breakingBad.R
 import com.example.breakingBad.base.BaseFragment
-import com.example.breakingBad.data.models.character.Character
 import com.example.breakingBad.databinding.*
 import com.example.breakingBad.ui.characterDetails.CharacterDetailsFragmentDirections
 import com.example.breakingBad.utils.CharacterDecorator
 import com.example.breakingBad.utils.LoadMoreListener
-import java.lang.RuntimeException
 
 class HomeFragment : BaseFragment() {
 
@@ -23,11 +21,9 @@ class HomeFragment : BaseFragment() {
 
     override fun getViewModelInstance() = viewModel
 
-    private val adapter = CardAdapter<Character>("HomeFragment") {
-        if (it is Character) {
-            val action = CharacterDetailsFragmentDirections.actionGlobalCharacterDetailsFragment(it)
-            activity?.findNavController(R.id.mainContainer)?.navigate(action)
-        } else throw RuntimeException("Unknown argument type for DetailsFragment")
+    private val adapter = HomeAdapter{
+        val action = CharacterDetailsFragmentDirections.actionGlobalCharacterDetailsFragment(it)
+        activity?.findNavController(R.id.mainContainer)?.navigate(action)
     }
 
     override fun onCreateView(
@@ -39,11 +35,10 @@ class HomeFragment : BaseFragment() {
         return binding?.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val layoutManager = GridLayoutManager(context, 2)
-        layoutManager.spanSizeLookup = CardAdapter.LoaderSpanSizeLookup(adapter)
+        layoutManager.spanSizeLookup = HomeAdapter.LoaderSpanSizeLookup(adapter)
         binding?.apply {
             recycleView.layoutManager = layoutManager
             recycleView.adapter = adapter
@@ -65,7 +60,7 @@ class HomeFragment : BaseFragment() {
             }
 
             viewModel.characters.observe(viewLifecycleOwner) {
-                adapter.itemList = it
+                adapter.characterList = it
             }
 
             viewModel.loadingMore.observe(viewLifecycleOwner) {

@@ -15,7 +15,7 @@ import com.example.breakingBad.base.BaseViewModel
 import com.example.breakingBad.data.models.character.Character
 import com.example.breakingBad.databinding.SavedCharactersScreenBinding
 import com.example.breakingBad.ui.characterDetails.CharacterDetailsFragmentDirections
-import com.example.breakingBad.ui.home.CardAdapter
+import com.example.breakingBad.ui.home.HomeAdapter
 import com.example.breakingBad.ui.login.LoginViewModel
 import com.example.breakingBad.utils.SavedAndEpisodeCharacterDecorator
 import com.example.breakingBad.utils.observeEvent
@@ -28,11 +28,9 @@ class SavedCharactersFragment : BaseFragment() {
     private var binding: SavedCharactersScreenBinding? = null
     private val loginViewModel by activityViewModels<LoginViewModel>()
 
-    private var adapter = CardAdapter<Character>("SavedCharactersFragment") {
-        if (it is Character) {
-            val action = CharacterDetailsFragmentDirections.actionGlobalCharacterDetailsFragment(it)
-            activity?.findNavController(R.id.mainContainer)?.navigate(action)
-        } else throw RuntimeException("Unknown argument type for DetailsFragment")
+    private var adapter = SavedAdapter {
+        val action = CharacterDetailsFragmentDirections.actionGlobalCharacterDetailsFragment(it)
+        activity?.findNavController(R.id.mainContainer)?.navigate(action)
     }
 
     override fun onCreateView(
@@ -62,6 +60,7 @@ class SavedCharactersFragment : BaseFragment() {
                 viewModel.onRefresh()
                 swipeToRefresh.isRefreshing = false
             }
+
         }
 
         viewModel.requestLogin.observeEvent(viewLifecycleOwner) {
@@ -69,7 +68,7 @@ class SavedCharactersFragment : BaseFragment() {
         }
 
         viewModel.characters.observe(viewLifecycleOwner) {
-            adapter.itemList = it
+            adapter.characterList = it
             binding?.swipeToRefresh?.isRefreshing = false
         }
 

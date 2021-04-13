@@ -15,7 +15,7 @@ import com.example.breakingBad.base.BaseViewModel
 import com.example.breakingBad.data.models.character.Episode
 import com.example.breakingBad.databinding.SeasonScreenBinding
 import com.example.breakingBad.ui.episodeDetails.EpisodeDetailsFragmentDirections
-import com.example.breakingBad.ui.home.CardAdapter
+import com.example.breakingBad.ui.home.HomeAdapter
 import com.example.breakingBad.utils.observeEvent
 
 class SeasonFragment : BaseFragment() {
@@ -30,11 +30,9 @@ class SeasonFragment : BaseFragment() {
 
     override fun getViewModelInstance(): BaseViewModel = viewModel
 
-    private var adapter = CardAdapter<Episode>("SeasonFragment") {
-        if(it is Episode){
+    private var adapter = SeasonAdapter {
             val action = EpisodeDetailsFragmentDirections.actionGlobalEpisodeFragment(it)
             activity?.findNavController(R.id.mainContainer)?.navigate(action)
-        }else throw RuntimeException("Unknown argument type for SeasonFragment")
     }
 
     override fun onCreateView(
@@ -71,7 +69,7 @@ class SeasonFragment : BaseFragment() {
         }
 
         viewModel.episodes.observe(viewLifecycleOwner) {
-            adapter.itemList = it
+            adapter.episodeList = it
             binding?.swipeToRefresh?.isRefreshing = false
         }
     }

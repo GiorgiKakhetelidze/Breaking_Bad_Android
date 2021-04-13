@@ -12,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import com.example.breakingBad.utils.getSplitName
+import java.lang.RuntimeException
 
 class CharacterDetailsViewModel(private val characters: Character) :
     BaseViewModel() {

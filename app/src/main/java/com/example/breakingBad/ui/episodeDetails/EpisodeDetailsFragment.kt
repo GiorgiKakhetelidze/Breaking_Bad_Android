@@ -17,7 +17,7 @@ import com.example.breakingBad.base.BaseViewModel
 import com.example.breakingBad.data.models.character.Character
 import com.example.breakingBad.databinding.EpisodeDetailScreenBinding
 import com.example.breakingBad.ui.characterDetails.CharacterDetailsFragmentDirections
-import com.example.breakingBad.ui.home.CardAdapter
+import com.example.breakingBad.ui.home.HomeAdapter
 import com.example.breakingBad.utils.SavedAndEpisodeCharacterDecorator
 import java.lang.RuntimeException
 
@@ -35,11 +35,9 @@ class EpisodeDetailsFragment : BaseFragment() {
 
     private var binding: EpisodeDetailScreenBinding? = null
 
-    private var adapter = CardAdapter<Character>("EpisodeDetailsFragment") {
-        if (it is Character) {
+    private var adapter = EpisodeAdapter {
             val action = CharacterDetailsFragmentDirections.actionGlobalCharacterDetailsFragment(it)
             activity?.findNavController(R.id.mainContainer)?.navigate(action)
-        } else throw RuntimeException("Unknown argument type for DetailsFragment")
     }
 
     override fun onCreateView(
@@ -74,7 +72,7 @@ class EpisodeDetailsFragment : BaseFragment() {
 
         viewModel.characters.observe(viewLifecycleOwner) {
             showEpisodeData()
-            adapter.itemList = it
+            adapter.characterList = it
         }
     }
 

@@ -13,7 +13,7 @@ import com.example.breakingBad.R
 import com.example.breakingBad.data.models.character.Character
 import com.example.breakingBad.databinding.SearchScreenBinding
 import com.example.breakingBad.ui.characterDetails.CharacterDetailsFragmentDirections
-import com.example.breakingBad.ui.home.CardAdapter
+import com.example.breakingBad.ui.home.HomeAdapter
 import com.example.breakingBad.utils.CharacterDecorator
 import java.lang.RuntimeException
 
@@ -21,12 +21,9 @@ class SearchFragment : Fragment() {
 
     private val viewModel: SearchViewModel by viewModels()
     private var binding: SearchScreenBinding? = null
-    private val adapter = CardAdapter<Character>("SearchFragment") {
-        if (it is Character) {
-            val action = CharacterDetailsFragmentDirections.actionGlobalCharacterDetailsFragment(it)
-            activity?.findNavController(R.id.mainContainer)?.navigate(action)
-        } else throw RuntimeException("Unknown argument type for DetailsFragment")
-
+    private val adapter = HomeAdapter {
+        val action = CharacterDetailsFragmentDirections.actionGlobalCharacterDetailsFragment(it)
+        activity?.findNavController(R.id.mainContainer)?.navigate(action)
     }
 
     override fun onCreateView(
@@ -53,7 +50,7 @@ class SearchFragment : Fragment() {
             )
         )
         viewModel.characters.observe(viewLifecycleOwner) {
-            adapter.itemList = it
+            adapter.characterList = it
         }
 
         binding?.searchInput?.doOnTextChanged { text, _, _, _ ->

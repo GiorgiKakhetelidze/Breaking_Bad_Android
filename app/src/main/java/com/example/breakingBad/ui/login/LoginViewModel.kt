@@ -44,7 +44,7 @@ class LoginViewModel : BaseViewModel() {
         }
     }
 
-    private suspend fun clearData() {
+    private fun clearData() {
         DataStore.authToken = null
         Repository.clearSavedCards()
         Repository.invalidateSavedIds()

@@ -32,6 +32,12 @@ private fun updateResources(context: Context, languageCode: String): Context {
     return ctx
 }
 
+fun updateLocale(context: Context, language: String): Context {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        updateResources(context, language)
+    } else updateResourcesLegacy(context, language)
+}
+
 fun getSplitName(name: String): String {
     val nameSurname = name.split(" ")
     if (nameSurname.size == 1 && nameSurname.first() == "Krazy-8") return "Domingo+Molina"
@@ -59,10 +65,4 @@ fun getSplitName(name: String): String {
         4 -> nameSurname.first() + "+" + nameSurname[1] + "+" + nameSurname[2] + "+" + nameSurname[3]
         else -> nameSurname.first() + "+" + nameSurname[1]
     }
-}
-
-fun updateLocale(context: Context, language: String): Context {
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        updateResources(context, language)
-    } else updateResourcesLegacy(context, language)
 }

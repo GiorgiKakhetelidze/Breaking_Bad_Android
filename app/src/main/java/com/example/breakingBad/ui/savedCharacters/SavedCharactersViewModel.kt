@@ -18,6 +18,7 @@ class SavedCharactersViewModel : BaseViewModel() {
     private val _requestLogin = MutableLiveData<Event<Unit>>()
     val requestLogin: LiveData<Event<Unit>> get() = _requestLogin
 
+
     val characters: LiveData<List<Character>> =
         Repository.getLocalSavedCharactersFlow()
             .map { list ->
@@ -54,8 +55,10 @@ class SavedCharactersViewModel : BaseViewModel() {
     fun getSavedCharacters() = viewModelScope.launch(Dispatchers.IO) {
         try {
             showLoading()
-            if (!Repository.checkSavedIdsValidity())
+            if (!Repository.checkSavedIdsValidity()){
                 Repository.updateRemoteSavedCharacters()
+            }
+
         } catch (e: Exception) {
             handleNetworkError(e)
         } finally {
